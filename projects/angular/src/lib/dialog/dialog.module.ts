@@ -1,23 +1,44 @@
-import { Injector, NgModule } from "@angular/core";
-import { CyberpullCoreModule } from "../core/core.module";
+import { NgModule } from "@angular/core";
+import { NGSuiteCoreModule } from "../core";
+import { NGSuiteFormModule } from "../form";
+
+import {
+  NGSuiteDialogBodyComponent,
+  NGSuiteDialogComponent,
+  NGSuiteDialogFooterComponent,
+  NGSuiteDialogHeaderComponent,
+  NGSuiteDialogRootComponent
+} from "./components";
+
+import {
+  NGSuiteDialogAlertComponent,
+  NGSuiteDialogConfirmComponent,
+} from "./popup";
 
 @NgModule({
   imports: [
-    CyberpullCoreModule,
+    NGSuiteCoreModule,
+    NGSuiteFormModule,
   ],
 
   exports: [
-    CyberpullCoreModule,
+    NGSuiteCoreModule,
+    NGSuiteFormModule,
+
+    NGSuiteDialogBodyComponent,
+    NGSuiteDialogFooterComponent,
+    NGSuiteDialogHeaderComponent,
   ],
 
-  declarations: [],
+  declarations: [
+    NGSuiteDialogComponent,
+    NGSuiteDialogBodyComponent,
+    NGSuiteDialogFooterComponent,
+    NGSuiteDialogHeaderComponent,
+    NGSuiteDialogRootComponent,
+
+    NGSuiteDialogAlertComponent,
+    NGSuiteDialogConfirmComponent,
+  ],
 })
-export class CyberpullDialogModule {
-
-  static injector: Injector;
-
-  constructor(injector: Injector) {
-    CyberpullDialogModule.injector = injector;
-  }
-
-}
+export class NGSuiteDialogModule {  }

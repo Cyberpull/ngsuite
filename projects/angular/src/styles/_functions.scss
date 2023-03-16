@@ -1,0 +1,14 @@
+@import './variables';
+
+@function ngs-color($key: default, $darken: 0) {
+  $value: map-get($color, $key);
+  @return darken($value, $darken);
+}
+
+@function ngs-device($key: md) {
+  @if map-has-key($device, $key) {
+    @return map-get($device, $key);
+  }
+
+  @return map-get($device, md);
+}

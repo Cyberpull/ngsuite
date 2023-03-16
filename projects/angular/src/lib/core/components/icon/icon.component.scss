@@ -1,0 +1,52 @@
+@import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+@import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+@import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+
+:host {
+  --vertical-align: middle;
+
+  display: inline-block;
+  vertical-align: var(--vertical-align) !important;
+
+  > .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    min-height: auto;
+
+    > i {
+      vertical-align: var(--vertical-align) !important;
+    }
+  }
+}
+
+.material-symbols-outlined,
+.material-symbols-rounded,
+.material-symbols-sharp {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  font-size: unset;
+
+  &::before {
+    display: inline;
+    vertical-align: middle;
+  }
+
+  &.search::before { content: "\e8b6"; }
+  &.home::before { content: "\e88a"; }
+  &.menu::before { content: "\e5d2"; }
+  &.close::before { content: "\e5cd"; }
+  &.settings::before { content: "\e8b8"; }
+  &.expand_more::before { content: "\e5cf"; }
+  &.done::before { content: "\e876"; }
+  &.check_circle::before { content: "\e86c"; }
+
+  &.dashboard::before { content: "\e871"; }
+  &.fingerprint::before { content: "\e90d"; }
+  &.forum::before { content: "\e0bf"; }
+  &.summarize::before { content: "\f071"; }
+  &.schedule::before { content: "\e8b5"; }
+  &.query_stats::before { content: "\e4fc"; }
+  &.sms::before { content: "\e625"; }
+  &.refresh::before { content: "\e5d5"; }
+}

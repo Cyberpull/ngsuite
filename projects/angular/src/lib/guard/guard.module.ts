@@ -1,23 +1,15 @@
 import { Injector, NgModule } from "@angular/core";
-import { CyberpullCoreModule } from "../core/core.module";
+import { NGSuiteCoreModule } from "../core/core.module";
 
 @NgModule({
   imports: [
-    CyberpullCoreModule,
+    NGSuiteCoreModule,
   ],
 
   exports: [
-    CyberpullCoreModule,
+    NGSuiteCoreModule,
   ],
 
   declarations: [],
 })
-export class CyberpullGuardModule {
-
-  static injector: Injector;
-
-  constructor(injector: Injector) {
-    CyberpullGuardModule.injector = injector;
-  }
-
-}
+export class NGSuiteGuardModule { }

@@ -1,0 +1,110 @@
+@import '../../../../styles/functions';
+
+:host {
+  --background: var(--ngs-light);
+  --border-color: rgba(0, 0, 0, .1);
+  --box-shadow: 0px 0px 3px var(--ngs-light);
+  --border: 1px solid var(--border-color);
+  --outline: 2px solid var(--border-color);
+  --icon-color: inherit;
+  --icon-border-left: none;
+  --icon-border-right: var(--border);
+  --icon-width: auto;
+  --icon-size: 16px;
+  --flex-direction: row;
+
+  --sum: calc(var(--red) + var(--green) + var(--blue));
+  --lightness: calc(var(--sum) / 255);
+  --color: hsl(0, 0%, calc((var(--lightness) - .6) * -10000000%));
+
+  // ------------------
+
+  display: inline-block;
+  visibility: hidden;
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &[block] {
+    display: block;
+    width: 100%;
+  }
+
+  @each $name, $value in $color {
+    &[#{$name}] {
+      --red: calc(var(--ngs-#{$name}-red) * 0.2126);
+      --green: calc(var(--ngs-#{$name}-green) * 0.7152);
+      --blue: calc(var(--ngs-#{$name}-blue) * 0.0722);
+
+      --background: var(--ngs-#{$name});
+      --box-shadow: 0px 0px 3px var(--ngs-#{$name});
+
+      &:disabled {
+        --background: rgba(var(--ngs-#{$name}-rgb), .9);
+      }
+    }
+  }
+
+  &[reverse] {
+    --flex-direction: row-reverse;
+    --icon-border-left: var(--border);
+    --icon-border-right: none;
+  }
+
+  > .button {
+    display: block;
+    visibility: visible;
+    padding: 0px !important;
+    background-color: var(--background) !important;
+    border: var(--border) !important;
+    border-radius: 3px !important;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color) !important;
+    cursor: pointer;
+    width: 100%;
+
+    &:focus {
+      outline: none !important;
+      box-shadow: var(--box-shadow) !important;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: .5;
+    }
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: var(--flex-direction) !important;
+    text-align: center;
+    height: 100% !important;
+  }
+
+  .icon, .content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    white-space: nowrap;
+  }
+
+  .icon {
+    color: var(--icon-color) !important;
+    width: var(--icon-width) !important;
+    font-size: var(--icon-size) !important;
+    border-left: var(--icon-border-left) !important;
+    border-right: var(--icon-border-right) !important;
+  }
+
+  .content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1 0 0 !important;
+  }
+
+}

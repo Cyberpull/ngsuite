@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  padding: 5px var(--ngs-panel-padding) !important;
+  background-color: var(--ngs-panel-background-color) !important;
+  border-top: var(--ngs-panel-border) !important;
+  width: var(--ngs-panel-width) !important;
+  max-width: var(--ngs-panel-width) !important;
+
+  > .wrapper {
+    width: var(--ngs-panel-width) !important;
+    max-width: var(--ngs-panel-width) !important;
+  }
+}

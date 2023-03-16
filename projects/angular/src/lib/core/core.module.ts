@@ -1,18 +1,53 @@
+import { CommonModule } from "@angular/common";
 import { Injector, NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
+import {
+  NGSuiteIconComponent,
+  NGSuitePanelBodyComponent,
+  NGSuitePanelComponent,
+  NGSuitePanelFooterComponent,
+  NGSuitePanelHeaderComponent
+} from "./components";
 
 @NgModule({
-  imports: [],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 
-  exports: [],
+  exports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
 
-  declarations: [],
+    NGSuiteIconComponent,
+
+    NGSuitePanelComponent,
+    NGSuitePanelBodyComponent,
+    NGSuitePanelFooterComponent,
+    NGSuitePanelHeaderComponent,
+  ],
+
+  declarations: [
+    NGSuiteIconComponent,
+
+    NGSuitePanelComponent,
+    NGSuitePanelBodyComponent,
+    NGSuitePanelFooterComponent,
+    NGSuitePanelHeaderComponent,
+  ],
 })
-export class CyberpullCoreModule {
+export class NGSuiteCoreModule {
 
   static injector: Injector;
 
   constructor(injector: Injector) {
-    CyberpullCoreModule.injector = injector;
+    NGSuiteCoreModule.injector = injector;
   }
 
 }

@@ -1,0 +1,102 @@
+:host {
+  --spacing: 10px;
+  --padding: var(--spacing);
+  --text-align: left;
+  --background-color: #FFF;
+  --label-background-color: var(--background-color);
+  // --label-background-color: transparent;
+  --border-radius: 3px;
+
+  --border: none;
+  --color: #333;
+  --box-shadow: none;
+
+  // ---------------
+
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  padding-top: 5px;
+  text-align: var(--text-align) !important;
+
+  &[type="textarea"] {
+    min-height: 70px;
+  }
+
+  > .wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 0 !important;
+    position: relative;
+    height: 100% !important;
+    border: 1px solid var(--mbi-default) !important;
+    border-radius: var(--border-radius) !important;
+    background-color: var(--background-color) !important;
+
+    > .switch {
+      display: flex;
+      flex-direction: column;
+      flex: 1 0 0 !important;
+    }
+  }
+
+  .input {
+    display: block;
+    flex: 1 0 0 !important;
+    flex-basis: auto !important;
+    width: 100% !important;
+    padding: var(--padding) !important;
+    border: var(--border) !important;
+    border-radius: var(--border-radius) !important;
+    background-color: var(--background-color) !important;
+    font-size: var(--ngs-form-font-size) !important;
+    color: var(--color) !important;
+
+    &:focus {
+      outline: none !important;
+    }
+
+    &:-webkit-autofill {
+      color: var(--color) !important;
+      border: var(--border) !important;
+      transition: background-color 10000s ease-in-out 0s;
+      -webkit-text-fill-color: var(--color) !important;
+      // box-shadow: var(--box-shadow) !important;
+      // -webkit-box-shadow: var(--box-shadow) !important;
+    }
+  }
+
+  textarea.input {
+    resize: vertical;
+  }
+
+  .label {
+    --padding: 0px var(--spacing);
+    --label-top: var(--spacing);
+
+    display: block;
+    position: absolute;
+    top: var(--label-top) !important;
+    left: 0px !important;
+    max-width: 100%;
+    pointer-events: none !important;
+    padding: var(--padding) !important;
+    text-align: var(--text-align) !important;
+    background-color: var(--label-background-color) !important;
+    border-radius: var(--border-radius) !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: var(--ngs-form-font-size) !important;
+    color: #777;
+    transition: all 200ms ease-in-out 0s;
+    line-height: 18px !important;
+
+    &.active {
+      --padding: 0px 10px;
+
+      transform-origin: top left;
+      transform: scale(0.77) translate(5px, -22px);
+    }
+  }
+}

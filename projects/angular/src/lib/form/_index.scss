@@ -1,0 +1,24 @@
+:root {
+  --ngs-form-font-size: 14px;
+}
+
+[ngs-input] {
+  display: block;
+  width: 100%;
+  resize: none;
+  padding: 10px;
+  border: 1px solid #CCC;
+}
+
+[ngs-btn] {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #CCC;
+  background-color: #FFF;
+  cursor: pointer;
+
+  &[btn-block] {
+    display: block;
+    width: 100%;
+  }
+}

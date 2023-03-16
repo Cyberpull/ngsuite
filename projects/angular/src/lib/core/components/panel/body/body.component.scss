@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  background-color: var(--ngs-panel-background-color) !important;
+  padding: var(--ngs-panel-padding) !important;
+  width: var(--ngs-panel-width) !important;
+  max-width: var(--ngs-panel-width) !important;
+
+  > .wrapper {
+    width: var(--ngs-panel-width) !important;
+    max-width: var(--ngs-panel-width) !important;
+    overflow: auto;
+  }
+}

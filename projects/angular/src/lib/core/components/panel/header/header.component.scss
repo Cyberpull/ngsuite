@@ -1,0 +1,45 @@
+:host {
+  display: block;
+  border-bottom: var(--ngs-panel-border) !important;
+  font-size: var(--ngs-panel-header-font-size) !important;
+  width: var(--ngs-panel-width) !important;
+
+  > .wrapper {
+    display: flex;
+    flex-direction: row;
+    width: var(--ngs-panel-width) !important;
+
+    > .icon {
+      display: block;
+      padding: 15px var(--ngs-panel-padding) !important;
+      border-right: var(--ngs-panel-border) !important;
+    }
+
+    > .content {
+      display: block;
+      flex-grow: 1 !important;
+      padding: 15px var(--ngs-panel-padding) !important;
+      white-space: nowrap;
+      width: 0px;
+    }
+
+    > .refresh {
+      display: block;
+      padding: 15px var(--ngs-panel-padding) !important;
+      border-left: var(--ngs-panel-border) !important;
+      cursor: pointer;
+    }
+  }
+
+  ::ng-deep {
+    [title] {
+      display: block;
+      margin: 0px !important;
+      font-size: var(--ngs-panel-header-font-size) !important;
+      width: var(--ngs-panel-width) !important;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-weight: 500;
+    }
+  }
+}

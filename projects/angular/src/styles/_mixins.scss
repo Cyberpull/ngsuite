@@ -1,0 +1,15 @@
+@import './variables';
+
+@mixin ngs-device($key: md) {
+  $width: 0;
+
+  @if map-has-key($device, $key) {
+    $width: map-get($device, $key);
+  } @else {
+    $width: map-get($device, md);
+  }
+
+  @media (min-width: $width) {
+    @content;
+  }
+}

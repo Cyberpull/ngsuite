@@ -1,0 +1,41 @@
+<div class="wrapper">
+  <div class="switch" [ngSwitch]="type">
+    <select
+      class="input"
+      *ngSwitchCase="'select'"
+      [ngModel]="value"
+      (ngModelChange)="onChange($event)"
+      (focusin)="isFocused = true"
+      (focusout)="isFocused = false"
+    >
+      <option [value]="entry.value" *ngFor="let entry of entries">{{ entry.label }}</option>
+    </select>
+
+    <textarea
+      class="input"
+      *ngSwitchCase="'textarea'"
+      [autocomplete]="autocomplete"
+      [ngModel]="value"
+      (ngModelChange)="onChange($event)"
+      (focusin)="isFocused = true"
+      (focusout)="isFocused = false"
+    ></textarea>
+
+    <input
+      class="input"
+      *ngSwitchDefault
+      [type]="type"
+      [autocomplete]="autocomplete"
+      [ngModel]="value"
+      (ngModelChange)="onChange($event)"
+      (focusin)="isFocused = true"
+      (focusout)="isFocused = false"
+    >
+  </div>
+
+  <ng-content></ng-content>
+
+  <div #placeholder class="label" [ngClass]="{'active': isActive}" *ngIf="label">
+    <span>{{ label }}</span>
+  </div>
+</div>

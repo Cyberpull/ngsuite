@@ -1,0 +1,17 @@
+<ngs-dialog-header *ngIf="title">
+  <h1 ngs-dialog-title>{{ title }}</h1>
+</ngs-dialog-header>
+
+<ngs-dialog-body>
+  <div [innerHTML]="message"></div>
+</ngs-dialog-body>
+
+<ngs-dialog-footer>
+  <ngs-button danger (click)="reject()">
+    <span>Cancel</span>
+  </ngs-button>
+
+  <ngs-button primary (click)="accept()">
+    <span>Okay</span>
+  </ngs-button>
+</ngs-dialog-footer>

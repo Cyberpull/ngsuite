@@ -1,3 +1,3 @@
-export interface CyberpullConfig {
+export interface NGSuiteConfig {
   [key: string]: any;
 }

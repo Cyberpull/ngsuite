@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  position: sticky;
+  bottom: 0px;
+  background-color: #FFF !important;
+  border-top: 1px solid var(--mbi-light) !important;
+  padding: 10px 20px;
+
+  > .wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100% !important;
+
+    ::ng-deep {
+      > [ngs-flex] {
+        width: 0px;
+      }
+
+      > ngs-button {
+        margin: 0px 5px;
+
+        &:first-child { margin-left: 0px; }
+        &:last-child { margin-right: 0px; }
+      }
+    }
+  }
+}

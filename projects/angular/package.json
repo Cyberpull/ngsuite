@@ -1,5 +1,5 @@
 {
-  "name": "@cyberpull/angular",
+  "name": "@ngsuite/angular",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^15.0.0",

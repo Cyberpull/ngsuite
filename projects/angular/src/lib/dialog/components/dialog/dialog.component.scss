@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  position: fixed;
+  top: 0px; bottom: 0px;
+  left: 0px; right: 0px;
+  background-color: rgba(0, 0, 0, .3);
+  visibility: visible !important;
+  z-index: 19000;
+
+  .ngs-dialog {
+    &-wrapper {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    &-table {
+      display: table;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    &-view {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+}

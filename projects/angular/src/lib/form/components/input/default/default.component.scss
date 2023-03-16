@@ -1,0 +1,33 @@
+:host {
+  --border: none;
+  --color: #333;
+  --background-color: #FFF;
+  --box-shadow: none;
+
+  // -------------
+
+  display: block;
+
+  input {
+    display: block;
+    width: 100% !important;
+    border: var(--border) !important;
+    background-color: var(--background-color) !important;
+    font-size: var(--ngs-form-font-size) !important;
+    color: var(--color) !important;
+    padding: 0px !important;
+
+    &:focus {
+      outline: none !important;
+    }
+
+    &:-webkit-autofill {
+      color: var(--color) !important;
+      border: var(--border) !important;
+      transition: background-color 10000s ease-in-out 0s;
+      -webkit-text-fill-color: var(--color) !important;
+      // box-shadow: var(--box-shadow) !important;
+      // -webkit-box-shadow: var(--box-shadow) !important;
+    }
+  }
+}
