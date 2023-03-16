@@ -28,5 +28,8 @@ jobs:
     - name: Install Dependencies
       run: npm ci
 
+    - name: Build Package
+      run: npm run build -- angular
+
     - name: Publish Package
       run: bash .deploy/publish.sh
