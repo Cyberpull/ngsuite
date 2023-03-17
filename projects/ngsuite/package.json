@@ -6,6 +6,7 @@
     "url": "https://github.com/Cyberpull/ngsuite.git"
   },
   "homepage": "https://www.cyberpull.com/wiki/opensource/ngsuite",
+  "keywords": ["angular", "ngsuite", "angular sdk", "sdk", "angular sdk", "angular components"],
   "peerDependencies": {
     "@angular/common": "^15.0.0",
     "@angular/core": "^15.0.0"
