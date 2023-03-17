@@ -1,6 +1,11 @@
 {
   "name": "ngsuite",
   "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cyberpull/ngsuite.git"
+  },
+  "homepage": "https://www.cyberpull.com/wiki/opensource/ngsuite",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
