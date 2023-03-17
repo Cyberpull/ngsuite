@@ -1,6 +1,6 @@
 set -e
 
-cd dist/angular
+cd dist/ngsuite
 
 npm set //registry.npmjs.org/:_authToken $TOKEN
 

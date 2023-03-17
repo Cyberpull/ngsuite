@@ -1,4 +1,4 @@
-name: Build and publish @ngsuite/angular
+name: Build and publish @ngsuite/ngsuite
 
 on:
   push:
@@ -29,7 +29,7 @@ jobs:
       run: npm ci
 
     - name: Build Package
-      run: npm run build -- angular
+      run: npm run build -- ngsuite
 
     - name: Publish Package
       run: bash .deploy/publish.sh

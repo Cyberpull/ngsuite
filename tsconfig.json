@@ -3,8 +3,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "angular": [
-        "dist/angular"
+      "ngsuite": [
+        "dist/ngsuite"
       ]
     },
     "baseUrl": "./",
