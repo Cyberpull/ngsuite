@@ -1,0 +1,27 @@
+<div class="left" *ngIf="data?.total">
+  <span>{{ pageInfo }}</span>
+  <span>&nbsp; &raquo; &nbsp;</span>
+  <span>{{ records }}</span>
+</div>
+
+<div class="spacer"></div>
+
+<div class="right" *ngIf="data?.total">
+  <a href="" [ngClass]="{'disabled': isPrevDisabled}" (click)="prev($event)">&laquo; PREV</a>
+
+  <span>&nbsp;</span>
+
+  <a href="" [ngClass]="{'disabled': isDisabled(1)}" (click)="navigate(1, $event)">1</a>
+
+  <span *ngIf="leftpad">...</span>
+
+  <a href="" [ngClass]="{'disabled': (data.current_page === page)}" (click)="navigate(page, $event)" *ngFor="let page of links">{{ page }}</a>
+
+  <span *ngIf="rightpad">...</span>
+
+  <a href="" *ngIf="showLastPage" [ngClass]="{'disabled': isDisabled(lastPage)}" (click)="navigate(lastPage, $event)">{{ lastPage }}</a>
+
+  <span>&nbsp;</span>
+
+  <a href="" [ngClass]="{'disabled': isNextDisabled}" (click)="next($event)">NEXT &raquo;</a>
+</div>

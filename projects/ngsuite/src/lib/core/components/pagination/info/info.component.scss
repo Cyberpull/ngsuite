@@ -1,0 +1,44 @@
+:host {
+  display: block;
+  font-size: 12px;
+  color: var(--cyb-pagination-color) !important;
+  text-align: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  @media only screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+  }
+
+  > .left {
+    color: inherit;
+    white-space: nowrap;
+  }
+
+  > .spacer { flex: 1; }
+
+  > .right {
+    white-space: nowrap;
+
+    a, span {
+      display: inline;
+      margin: 0px 2px;
+      color: var(--cyb-pagination-color) !important;
+
+      &:first-child {
+        margin-left: 0px;
+      }
+
+      &:last-child {
+        margin-right: 0px;
+      }
+
+      &.disabled {
+        font-weight: 600;
+        color: var(--cyb-pagination-active-color) !important;
+        pointer-events: none !important;
+      }
+    }
+  }
+}

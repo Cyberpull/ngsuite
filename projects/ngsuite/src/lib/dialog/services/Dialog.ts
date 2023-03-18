@@ -1,7 +1,6 @@
-import { ApplicationRef, ComponentFactoryResolver, ComponentRef, Injectable, Injector } from "@angular/core";
+import { ApplicationRef, ComponentRef, createComponent, Injectable } from "@angular/core";
 import { Registry } from "../../core/Registry";
 import { NGSuiteComponent } from "../../core";
-import { NGSuiteDialogComponent } from "../components/dialog/dialog.component";
 import { NGSuiteDialogRootComponent } from "../components/root/root.component";
 import { NGSuiteDialogConfig, NGSuiteDialogPopupOptions } from "../interfaces/Dialog";
 import { NGSuiteDialogInstance } from "./DialogInstance";
@@ -17,13 +16,12 @@ export class NGSuiteDialog {
   private componentRef: ComponentRef<NGSuiteDialogRootComponent>;
 
   constructor(
-    private injector: Injector,
-    private appRef: ApplicationRef,
-    private factoryResolver: ComponentFactoryResolver
+    private appRef: ApplicationRef
   ) {
-    const componentFactory = factoryResolver.resolveComponentFactory(NGSuiteDialogRootComponent);
+    this.componentRef = createComponent(NGSuiteDialogRootComponent, {
+      environmentInjector: appRef.injector
+    });
 
-    this.componentRef = componentFactory.create(injector);
     appRef.attachView(this.componentRef.hostView);
 
     const { location } = this.componentRef;
@@ -60,13 +58,10 @@ export class NGSuiteDialog {
   open(component: NGSuiteComponent<any>, config?: NGSuiteDialogConfig) {
     if(!config) config = null as any;
 
-    const { factoryResolver, componentRef } = this;
+    const { componentRef } = this;
     const { instance: parent } = componentRef;
 
-    const dialogFactory = factoryResolver.resolveComponentFactory(NGSuiteDialogComponent);
-
     const instance = new NGSuiteDialogInstance(
-      dialogFactory,
       parent.viewContainerRef,
       component,
       componentRef.injector,

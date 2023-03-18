@@ -1,0 +1,10 @@
+<div class="content">
+  <ng-content></ng-content>
+</div>
+
+<div class="overlay" [ngClass]="{'visible': loading}">
+  <div class="animation">
+    <ng-template #container></ng-template>
+  </div>
+</div>
+

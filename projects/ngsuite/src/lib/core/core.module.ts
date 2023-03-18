@@ -4,7 +4,14 @@ import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import {
+  NGSuiteContainerComponent,
   NGSuiteIconComponent,
+  NGSuiteLoadingAnimationComponent,
+  NGSuiteLoadingPageComponent,
+  NGSuiteLoadingRootComponent,
+  NGSuiteLoadingSectionComponent,
+  NGSuitePaginationComponent,
+  NGSuitePaginationInfoComponent,
   NGSuitePanelBodyComponent,
   NGSuitePanelComponent,
   NGSuitePanelFooterComponent,
@@ -31,6 +38,12 @@ import {
     NGSuitePanelBodyComponent,
     NGSuitePanelFooterComponent,
     NGSuitePanelHeaderComponent,
+
+    NGSuiteContainerComponent,
+
+    NGSuiteLoadingSectionComponent,
+
+    NGSuitePaginationComponent,
   ],
 
   declarations: [
@@ -40,6 +53,16 @@ import {
     NGSuitePanelBodyComponent,
     NGSuitePanelFooterComponent,
     NGSuitePanelHeaderComponent,
+
+    NGSuiteContainerComponent,
+
+    NGSuiteLoadingAnimationComponent,
+    NGSuiteLoadingSectionComponent,
+    NGSuiteLoadingPageComponent,
+    NGSuiteLoadingRootComponent,
+
+    NGSuitePaginationComponent,
+    NGSuitePaginationInfoComponent,
   ],
 })
 export class NGSuiteCoreModule {

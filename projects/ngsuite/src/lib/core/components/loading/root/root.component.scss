@@ -1,0 +1,11 @@
+:host {
+  display: block;
+
+  ngs-loading-page {
+    display: none;
+
+    &.visible {
+      display: block;
+    }
+  }
+}

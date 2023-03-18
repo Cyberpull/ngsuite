@@ -1,4 +1,4 @@
-import { ComponentFactory, ComponentRef, ElementRef, Injector, ViewContainerRef } from "@angular/core";
+import { ComponentRef, ElementRef, Injector, ViewContainerRef } from "@angular/core";
 import { Observable, Subscriber } from "rxjs";
 import { NGSuiteComponent } from "../../core";
 import { NGSuiteDialogComponent } from "../components/dialog/dialog.component";
@@ -18,7 +18,6 @@ export class NGSuiteDialogInstance {
   get afterClosed() { return this.xAfterClosed; }
 
   constructor(
-    private xComponentFactory: ComponentFactory<NGSuiteDialogComponent>,
     private xViewContainerRef: ViewContainerRef,
     private component: NGSuiteComponent<any>,
     private injector: Injector,
@@ -37,11 +36,10 @@ export class NGSuiteDialogInstance {
         ],
       });
 
-      this.xDialogComponentRef = xViewContainerRef.createComponent(
-        xComponentFactory,
-        undefined,
-        newInjector
-      );
+      this.xDialogComponentRef = xViewContainerRef.createComponent(NGSuiteDialogComponent, {
+        injector: newInjector,
+        index: undefined
+      });
     });
 
     this.processCommand = this.processCommand.bind(this);

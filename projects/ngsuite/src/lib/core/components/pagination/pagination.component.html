@@ -1,0 +1,11 @@
+<div class="top">
+  <ngs-pagination-info [data]="data" (callback)="navigate($event)"></ngs-pagination-info>
+</div>
+
+<div class="content table-responsive">
+  <ng-content></ng-content>
+</div>
+
+<div class="bottom">
+  <ngs-pagination-info [data]="data" (callback)="navigate($event)"></ngs-pagination-info>
+</div>

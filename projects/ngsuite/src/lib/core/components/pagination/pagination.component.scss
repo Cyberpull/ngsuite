@@ -1,0 +1,14 @@
+:host {
+  display: block;
+
+  > .top {
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, .2);
+  }
+
+  > .bottom {
+    margin-top: 15px;
+    // 2px solid #e9ecef
+  }
+}
