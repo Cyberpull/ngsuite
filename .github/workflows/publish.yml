@@ -11,7 +11,7 @@ jobs:
     environment: production
     env:
       TOKEN: ${{ secrets.NPM_TOKEN }}
-      LIB_VERSION: ${{ github.ref }}
+      LIB_VERSION: ${{ github.ref_name }}
     strategy:
       matrix:
         node-version: [16.x]
