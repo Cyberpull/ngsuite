@@ -1,9 +1,11 @@
 set -e
 
-cd dist/ngsuite
+pushd dist/ngsuite
 
 npm set //registry.npmjs.org/:_authToken $TOKEN
 
+npm version $LIB_VERSION
+
 npm publish --access public
 
-cd ../..
+popd

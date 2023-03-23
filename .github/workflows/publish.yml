@@ -2,9 +2,8 @@ name: Build and publish @ngsuite/ngsuite
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    tags:
+      - "*"
 
 jobs:
   build:
@@ -12,6 +11,7 @@ jobs:
     environment: production
     env:
       TOKEN: ${{ secrets.NPM_TOKEN }}
+      LIB_VERSION: ${{ github.ref }}
     strategy:
       matrix:
         node-version: [16.x]

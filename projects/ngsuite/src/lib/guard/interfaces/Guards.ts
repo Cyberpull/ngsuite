@@ -1,3 +1,4 @@
+import { StaticProvider } from "@angular/core";
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
 
@@ -24,6 +25,6 @@ export interface GuardEntry {
 }
 
 export interface SerialGuardInfo {
-  providers?: Chain<GuardEntry>[];
+  providers?: StaticProvider[];
   entries: Chain<GuardEntry>[];
 }

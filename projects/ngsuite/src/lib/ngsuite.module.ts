@@ -21,7 +21,9 @@ import { NGSuiteGuardModule } from './guard';
 })
 export class NGSuiteModule {
 
-  static forRoot(config: NGSuiteConfig): ModuleWithProviders<any> {
+  static forRoot(config?: NGSuiteConfig): ModuleWithProviders<any> {
+    if (!config) config = {};
+
     return {
       ngModule: NGSuiteModule,
       providers: Registry.entries([
