@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
 import { SerialGuardFn } from "../functions";
 import { GuardConstructor, GuardDecorator, SerialGuardInfo } from "../interfaces";
@@ -7,7 +7,7 @@ import { GuardConstructor, GuardDecorator, SerialGuardInfo } from "../interfaces
 export function SerialGuard(info: SerialGuardInfo): GuardDecorator {
   return function<T extends GuardConstructor> (guard: T) {
     @Injectable()
-    class _SerialGuard extends guard implements CanActivate, CanActivateChild {
+    class _SerialGuard extends guard  {
 
       readonly info: SerialGuardInfo = info;
 
