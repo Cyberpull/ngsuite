@@ -1,0 +1,9 @@
+:host {
+  width: 20vw;
+  max-width: 100px;
+  aspect-ratio: 1/1;
+
+  > svg {
+    width: 100% !important;
+  }
+}

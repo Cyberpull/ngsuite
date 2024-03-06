@@ -1,9 +1,5 @@
 @import '../../../../../styles/variables';
 
-:root {
-  --ngs-loading-background: rgba(0, 0, 0, .7);
-}
-
 :host {
   display: flex;
   flex-direction: column;
@@ -15,7 +11,7 @@
   width: 100% !important;
   height: 100% !important;
 
-  &[visible] {
+  &[data-visible="true"] {
     visibility: visible !important;
   }
 }
