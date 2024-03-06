@@ -28,8 +28,8 @@ jobs:
     - name: Install Dependencies
       run: npm ci
 
-    - name: Build Package
-      run: npm run build -- ngsuite
+    - name: Build Packages
+      run: bash .deploy/build.sh
 
-    - name: Publish Package
+    - name: Publish Packages
       run: bash .deploy/publish.sh

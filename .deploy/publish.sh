@@ -1,6 +1,12 @@
 set -e
 
-pushd dist/ngsuite
+cd dist
+
+# ===========================
+# Publish NGSuite
+# ===========================
+
+pushd ngsuite
 
 npm set //registry.npmjs.org/:_authToken $TOKEN
 
