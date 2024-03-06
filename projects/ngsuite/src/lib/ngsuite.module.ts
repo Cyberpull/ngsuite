@@ -1,4 +1,8 @@
 import { NgModule, ModuleWithProviders } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
 
 import { Registry } from './core/Registry';
 
@@ -8,12 +12,24 @@ import { NGSuiteGuardModule } from './guard';
 
 @NgModule({
   imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+
     NGSuiteCoreModule,
     NGSuiteDialogModule,
     NGSuiteGuardModule,
   ],
 
   exports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+
     NGSuiteCoreModule,
     NGSuiteDialogModule,
     NGSuiteGuardModule,
