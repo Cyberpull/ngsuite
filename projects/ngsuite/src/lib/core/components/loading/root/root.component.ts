@@ -7,6 +7,8 @@ import { Component } from "@angular/core";
 })
 export class NGSuiteLoadingRootComponent {
 
+  public text: string = '';
+
   private instances: number = 0;
 
   get visible() { return this.instances > 0; }
@@ -14,6 +16,7 @@ export class NGSuiteLoadingRootComponent {
   constructor() {  }
 
   start(text: string = '') {
+    this.text = text;
     this.instances++;
   }
 

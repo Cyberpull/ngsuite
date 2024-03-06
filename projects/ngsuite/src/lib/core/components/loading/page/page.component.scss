@@ -1,3 +1,21 @@
+@import '../../../../../styles/variables';
+
+:root {
+  --ngs-loading-background: rgba(0, 0, 0, .7);
+}
+
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  visibility: hidden;
+  background-color: var(--ngs-loading-background) !important;
+  width: 100% !important;
+  height: 100% !important;
+
+  &[visible] {
+    visibility: visible !important;
+  }
 }

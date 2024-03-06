@@ -9,11 +9,12 @@ $color: (
   info: #0DCAF0,
   light: #F8F9FA,
   dark: #212529,
-);
+) !default;
 
 $device: (
+  xs: 375px,
   sm: 576px,
   md: 768px,
   lg: 992px,
   xl: 1200px,
-);
+) !default;

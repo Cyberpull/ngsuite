@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, Inject, Injector, ViewChild, ViewContainerRef } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, Inject, Injector, Input, ViewChild, ViewContainerRef } from "@angular/core";
 import { NGSuiteConfig } from "../../../interfaces";
 import { NGSuiteLoadingAnimationComponent } from "../animation/animation.component";
 
