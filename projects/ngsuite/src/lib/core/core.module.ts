@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Injector, NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 import {
   NGSuiteContainerComponent,
@@ -21,16 +22,18 @@ import {
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
 
   exports: [
     CommonModule,
-    RouterModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
+    HttpClientModule,
 
     NGSuiteIconComponent,
 
