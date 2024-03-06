@@ -25,7 +25,7 @@ export class NGSuiteLoadingPageComponent implements AfterViewInit {
     const { viewContainerRef, config, cd } = this;
 
     if (viewContainerRef) {
-      const animation = config.pageLoadingAnimation || NGSuiteLoadingAnimationComponent;
+      const animation = config.pageLoadingAnimation || config.loadingAnimation || NGSuiteLoadingAnimationComponent;
 
       const newInjector = Injector.create({
         parent: this.injector,
