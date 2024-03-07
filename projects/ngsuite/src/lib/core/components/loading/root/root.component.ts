@@ -21,13 +21,8 @@ export class NGSuiteLoadingRootComponent {
   }
 
   stop() {
-    if (!this.instances) return;
-
-    this.instances--;
-
-    if (!this.instances) {
-      //
-    }
+    this.instances = Math.max(--this.instances, 0);
+    if (!this.instances) this.text = '';
   }
 
 }

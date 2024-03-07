@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, Inject, Injector, Input, ViewChild, ViewContainerRef } from "@angular/core";
 import { NGSuiteConfig } from "../../../interfaces";
 import { NGSuiteLoadingAnimationComponent } from "../animation/animation.component";
+import { LoadingReader, LoadingWriter } from "../../../services";
 
 @Component({
   selector: 'ngs-loading-page',
@@ -11,6 +12,14 @@ export class NGSuiteLoadingPageComponent implements AfterViewInit {
 
   private componentRef?: ComponentRef<any>;
 
+  private writer: LoadingWriter;
+
+  @Input('text') set text(value: string) { this.writer.text.next(value); }
+  get text() { return this.writer.text.value; }
+
+  @Input('counter') set counter(value: number) { this.writer.counter.next(value); }
+  get counter() { return this.writer.counter.value; }
+
   @ViewChild('container', {
     read: ViewContainerRef
   }) viewContainerRef?: ViewContainerRef;
@@ -19,17 +28,21 @@ export class NGSuiteLoadingPageComponent implements AfterViewInit {
     private injector: Injector,
     private cd: ChangeDetectorRef,
     @Inject('NGSuite') private config: NGSuiteConfig
-  ) {  }
+  ) {
+    this.writer = new LoadingWriter();
+  }
 
   ngAfterViewInit() {
-    const { viewContainerRef, config, cd } = this;
+    const { writer, viewContainerRef, config, cd } = this;
 
     if (viewContainerRef) {
       const animation = config.pageLoadingAnimation || config.loadingAnimation || NGSuiteLoadingAnimationComponent;
 
       const newInjector = Injector.create({
         parent: this.injector,
-        providers: []
+        providers: [
+          { provide: LoadingReader, useValue: new LoadingReader(writer) }
+        ]
       });
 
       this.componentRef = viewContainerRef.createComponent(animation, {
