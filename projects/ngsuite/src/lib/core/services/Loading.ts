@@ -1,4 +1,4 @@
-import { ApplicationRef, ComponentRef, createComponent, Injectable } from "@angular/core";
+import { ApplicationRef, ComponentRef, createComponent, createEnvironmentInjector, Injectable } from "@angular/core";
 import { NGSuiteLoadingRootComponent } from "../components";
 import { Registry } from "../Registry";
 
@@ -10,8 +10,10 @@ export class NGSuiteLoading {
   constructor(
     private appRef: ApplicationRef
   ) {
+    const injector = createEnvironmentInjector([], appRef.injector);
+
     this.rootComponentRef = createComponent(NGSuiteLoadingRootComponent, {
-      environmentInjector: appRef.injector
+      environmentInjector: injector
     });
 
     appRef.attachView(this.rootComponentRef.hostView);
