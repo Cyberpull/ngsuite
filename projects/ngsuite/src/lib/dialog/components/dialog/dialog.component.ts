@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ComponentFactoryResolver, ComponentRef, ElementRef, EmbeddedViewRef, Inject, Injector, OnDestroy, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, EmbeddedViewRef, Inject, Injector, OnDestroy, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { NGSuiteComponent } from "../../../core";
 import { NGSuiteDialogConfig, NGS_DIALOG_CONFIG, NGS_DIALOG_CONTENT, NGS_DIALOG_DATA } from "../../interfaces/Dialog";
 import { NGSuiteDialogRef } from "../../services/DialogRef";
@@ -19,7 +19,6 @@ export class NGSuiteDialogComponent implements AfterViewInit, OnDestroy {
   constructor(
     private injector: Injector,
     private cd: ChangeDetectorRef,
-    private factoryResolver: ComponentFactoryResolver,
     private xDialogRef: NGSuiteDialogRef<any>,
     @Inject(NGS_DIALOG_CONTENT) private content: NGSuiteComponent<any>,
     @Inject(NGS_DIALOG_CONFIG) private config: NGSuiteDialogConfig,
@@ -32,7 +31,7 @@ export class NGSuiteDialogComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    const { cd, factoryResolver, viewContainerRef, injector, content, config } = this;
+    const { cd, viewContainerRef, injector, content, config } = this;
 
     const newInjector = Injector.create({
       parent: injector,
@@ -43,9 +42,9 @@ export class NGSuiteDialogComponent implements AfterViewInit, OnDestroy {
       ]
     });
 
-    const componentFactory = factoryResolver.resolveComponentFactory(content);
-
-    this.componentRef = viewContainerRef.createComponent(componentFactory, 0, newInjector);
+    this.componentRef = viewContainerRef.createComponent(content, {
+      injector: newInjector
+    });
 
     const { nativeElement } = this.componentRef.location as ElementRef<HTMLElement>;
 

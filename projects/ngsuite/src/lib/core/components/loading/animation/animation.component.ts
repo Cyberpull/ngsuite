@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { LoadingReader } from '../../../services';
+import { Component, Inject } from '@angular/core';
 
 @Component({
   selector: 'ngs-loading-animation',
@@ -8,8 +7,6 @@ import { LoadingReader } from '../../../services';
 })
 export class NGSuiteLoadingAnimationComponent {
 
-  constructor(
-    private reader: LoadingReader
-  ) {  }
+  constructor() {  }
 
 }

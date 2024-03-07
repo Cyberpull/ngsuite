@@ -1,9 +1,6 @@
 import { Observable } from "rxjs";
 import { LoadingWriter } from "./LoadingWriter";
-import { Injectable } from "@angular/core";
-import { Registry } from "../Registry";
 
-@Injectable()
 export class LoadingReader {
 
   readonly text: Observable<string>;
@@ -15,5 +12,3 @@ export class LoadingReader {
   }
 
 }
-
-Registry.add(LoadingReader);

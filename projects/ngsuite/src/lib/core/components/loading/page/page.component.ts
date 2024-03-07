@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, Inject, Injector, Input, ViewChild, ViewContainerRef } from "@angular/core";
-import { NGSuiteConfig } from "../../../interfaces";
+import { NGS_LOADING_READER, NGSuiteConfig } from "../../../interfaces";
 import { NGSuiteLoadingAnimationComponent } from "../animation/animation.component";
 import { LoadingReader, LoadingWriter } from "../../../services";
 
@@ -41,7 +41,7 @@ export class NGSuiteLoadingPageComponent implements AfterViewInit {
       const newInjector = Injector.create({
         parent: this.injector,
         providers: [
-          { provide: LoadingReader, useValue: new LoadingReader(writer) }
+          { provide: NGS_LOADING_READER, useValue: new LoadingReader(writer) }
         ]
       });
 
