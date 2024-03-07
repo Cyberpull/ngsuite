@@ -1,35 +1,56 @@
 import { ApplicationRef, ComponentRef, createComponent, createEnvironmentInjector, Injectable } from "@angular/core";
 import { NGSuiteLoadingRootComponent } from "../components";
 import { Registry } from "../Registry";
+import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable()
 export class NGSuiteLoading {
 
-  private rootComponentRef: ComponentRef<NGSuiteLoadingRootComponent>;
+  readonly text: Observable<string>;
+  readonly showing: Observable<boolean>;
+  readonly count: Observable<number>;
 
-  constructor(
-    private appRef: ApplicationRef
-  ) {
-    const injector = createEnvironmentInjector([], appRef.injector);
+  private xText: BehaviorSubject<string>;
+  private xShowing: BehaviorSubject<boolean>;
+  private xCount: BehaviorSubject<number>;
 
-    this.rootComponentRef = createComponent(NGSuiteLoadingRootComponent, {
-      environmentInjector: injector
-    });
+  constructor() {
+    this.xText = new BehaviorSubject('');
+    this.text = this.xText.asObservable();
 
-    appRef.attachView(this.rootComponentRef.hostView);
+    this.xShowing = new BehaviorSubject(false);
+    this.showing = this.xShowing.asObservable();
 
-    const { location } = this.rootComponentRef;
-    document.body.appendChild(location.nativeElement);
+    this.xCount = new BehaviorSubject(0);
+    this.count = this.xCount.asObservable();
   }
 
   start(text: string = '') {
-    const { rootComponentRef: { instance } } = this;
-    instance.start(text);
+    const { xText, xCount, xShowing } = this;
+
+    const count = xCount.value + 1;
+    const showing = count > 0;
+
+    xText.next(text);
+    xCount.next(count);
+
+    if (showing !== xShowing.value) {
+      xShowing.next(showing);
+    }
   }
 
   stop() {
-    const { rootComponentRef: { instance } } = this;
-    instance.stop();
+    const { xText, xCount, xShowing } = this;
+
+    const count = Math.max(xCount.value - 1, 0);
+    const showing = count > 0;
+
+    if (!showing) xText.next('');
+    xCount.next(count);
+
+    if (showing !== xShowing.value) {
+      xShowing.next(showing);
+    }
   }
 
 }

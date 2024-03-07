@@ -45,6 +45,7 @@ import {
     NGSuiteContainerComponent,
 
     NGSuiteLoadingSectionComponent,
+    NGSuiteLoadingRootComponent,
 
     NGSuitePaginationComponent,
   ],
