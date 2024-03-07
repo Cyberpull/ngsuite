@@ -1,6 +1,8 @@
 import { Observable } from "rxjs";
 import { LoadingWriter } from "./LoadingWriter";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class LoadingReader {
 
   readonly text: Observable<string>;
