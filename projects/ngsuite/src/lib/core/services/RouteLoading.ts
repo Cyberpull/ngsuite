@@ -15,7 +15,7 @@ export class NGSuiteRouteLoading {
     private loading: NGSuiteLoading
   ) {  }
 
-  init() {
+  start() {
     const { router, loading, xLoadingSubs } = this;
 
     if (xLoadingSubs.length) return;
@@ -41,7 +41,7 @@ export class NGSuiteRouteLoading {
     }));
   }
 
-  destroy() {
+  stop() {
     const { xLoadingSubs } = this;
 
     while (xLoadingSubs.length) {
