@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, Inject, Injector, Input, ViewChild, ViewContainerRef } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Inject, Injector, Input, ViewChild, ViewContainerRef } from "@angular/core";
 import { NGSuiteConfig } from "../../../interfaces";
 import { NGSuiteLoadingAnimationComponent } from "../animation/animation.component";
 
@@ -38,6 +38,12 @@ export class NGSuiteLoadingSectionComponent implements AfterViewInit {
         injector: newInjector,
         index: undefined
       });
+
+      const { componentRef: { location } } = this;
+      const $element = location.nativeElement as HTMLElement;
+
+      $element.setAttribute('data-ngs-loading', 'section');
+      $element.classList.add('ngs-loading-section');
     }
 
     cd.detectChanges();
