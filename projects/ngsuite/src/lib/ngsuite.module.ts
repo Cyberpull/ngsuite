@@ -10,6 +10,8 @@ import { NGSuiteCoreModule, NGSuiteConfig } from './core';
 import { NGSuiteDialogModule } from './dialog';
 import { NGSuiteGuardModule } from './guard';
 
+import { NGSuiteRootComponent } from "./root";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -33,6 +35,13 @@ import { NGSuiteGuardModule } from './guard';
     NGSuiteCoreModule,
     NGSuiteDialogModule,
     NGSuiteGuardModule,
+
+    // Root Component
+    NGSuiteRootComponent,
+  ],
+
+  declarations: [
+    NGSuiteRootComponent,
   ],
 })
 export class NGSuiteModule {

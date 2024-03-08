@@ -5,7 +5,6 @@ import { NGSuiteDialogComponent } from "../components/dialog/dialog.component";
 import { NGSuiteDialogCommand, NGSuiteDialogConfig, NGS_DIALOG_CONFIG, NGS_DIALOG_CONTENT } from "../interfaces/Dialog";
 import { NGSuiteDialogRef } from "./DialogRef";
 
-
 export class NGSuiteDialogInstance {
 
   private xDialogComponentRef: ComponentRef<NGSuiteDialogComponent> = null as any;

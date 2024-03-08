@@ -1,34 +1,20 @@
 import { ApplicationRef, ComponentRef, createComponent, createEnvironmentInjector, Injectable } from "@angular/core";
 import { Registry } from "../../core/Registry";
 import { NGSuiteComponent } from "../../core";
-import { NGSuiteDialogRootComponent } from "../components/root/root.component";
-import { NGSuiteDialogConfig, NGSuiteDialogPopupOptions } from "../interfaces/Dialog";
+import { NGSuiteDialogConfig, NGSuiteDialogPopupOptions, NGSuiteDialogRoot } from "../interfaces";
 import { NGSuiteDialogInstance } from "./DialogInstance";
 import { NGSuiteDialogAlertComponent } from "../popup/alert/alert.component";
 import { NGSuiteDialogConfirmComponent } from "../popup/confirm/confirm.component";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 
 const DialogInstances: NGSuiteDialogInstance[] = [];
 
 @Injectable()
 export class NGSuiteDialog {
 
-  private componentRef: ComponentRef<NGSuiteDialogRootComponent>;
+  private root?: NGSuiteDialogRoot;
 
-  constructor(
-    private appRef: ApplicationRef
-  ) {
-    const injector = createEnvironmentInjector([], appRef.injector);
-
-    this.componentRef = createComponent(NGSuiteDialogRootComponent, {
-      environmentInjector: injector
-    });
-
-    appRef.attachView(this.componentRef.hostView);
-
-    const { location } = this.componentRef;
-    document.body.appendChild(location.nativeElement);
-
+  constructor() {
     this.onEscape = this.onEscape.bind(this);
     this.onDocumentClick = this.onDocumentClick.bind(this);
 
@@ -57,16 +43,26 @@ export class NGSuiteDialog {
     instance.focus();
   }
 
-  open(component: NGSuiteComponent<any>, config?: NGSuiteDialogConfig) {
+  attach(root: NGSuiteDialogRoot) {
+    if (this.root) return;
+    this.root = root;
+  }
+
+  open(component: NGSuiteComponent<any>, config?: NGSuiteDialogConfig):  NGSuiteDialogInstance {
     if(!config) config = null as any;
 
-    const { componentRef } = this;
-    const { instance: parent } = componentRef;
+    const { root } = this;
+
+    if (!root) throw new Error(
+      '"ngs-dialog-root" component not found. ' +
+      'Use "<ngs-root></ngs-root>" in your root component to enable all NGSuite features or ' +
+      'add "<ngs-dialog-root></ngs-dialog-root>" to your root component to enable the NGSuiteDialog feature.'
+    );
 
     const instance = new NGSuiteDialogInstance(
-      parent.viewContainerRef,
+      root.viewContainerRef,
       component,
-      componentRef.injector,
+      root.injector,
       config
     );
 
@@ -74,7 +70,7 @@ export class NGSuiteDialog {
 
     instance.afterClosed.subscribe(() => {
       const index = DialogInstances.indexOf(instance);
-      DialogInstances.splice(index);
+      DialogInstances.splice(index, 1);
     });
 
     return instance;

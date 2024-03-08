@@ -45,6 +45,7 @@ import {
     NGSuiteDialogBodyComponent,
     NGSuiteDialogFooterComponent,
     NGSuiteDialogHeaderComponent,
+    NGSuiteDialogRootComponent,
   ],
 
   declarations: [

@@ -1,3 +1,4 @@
+import { Injector, ViewContainerRef } from "@angular/core";
 
 export const NGS_DIALOG_CONTENT = 'ngs-dialog-content';
 export const NGS_DIALOG_CONFIG = 'ngs-dialog-config';
@@ -18,4 +19,9 @@ export interface NGSuiteDialogCommand<T = any> {
 export interface NGSuiteDialogPopupOptions {
   title: string;
   message: string;
+}
+
+export interface NGSuiteDialogRoot {
+  viewContainerRef: ViewContainerRef;
+  injector: Injector;
 }
