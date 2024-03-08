@@ -1,12 +1,12 @@
 :host {
   width: 20vw;
-  max-width: var(--width) !important;
+  max-width: var(--max-width) !important;
   aspect-ratio: 1/1;
 
-  --width: 100px;
+  --max-width: 100px;
 
-  &[inline] { --width: 40px; }
-  &[section] { --width: 50px; }
+  &[data-ngs-loading="section"] { --max-width: 60px; }
+  &[data-ngs-loading="inline"] { --max-width: 40px; }
 
   > svg {
     width: 100% !important;
