@@ -1,4 +1,4 @@
-import { Component, Injector, ViewChild, ViewContainerRef } from "@angular/core";
+import { Component, Injector, OnDestroy, ViewChild, ViewContainerRef } from "@angular/core";
 import { NGSuiteDialogRoot } from "../../interfaces";
 import { NGSuiteDialog } from "../../services";
 
@@ -7,7 +7,7 @@ import { NGSuiteDialog } from "../../services";
   templateUrl: 'root.component.html',
   styleUrls: ['root.component.scss']
 })
-export class NGSuiteDialogRootComponent implements NGSuiteDialogRoot {
+export class NGSuiteDialogRootComponent implements NGSuiteDialogRoot, OnDestroy {
 
   @ViewChild('container', {
     read: ViewContainerRef
@@ -17,7 +17,12 @@ export class NGSuiteDialogRootComponent implements NGSuiteDialogRoot {
     readonly injector: Injector,
     private service: NGSuiteDialog
   ) {
-    service.attach(this);
+    NGSuiteDialog.attach(service, this);
+  }
+
+  ngOnDestroy(): void {
+    const { service } = this;
+    NGSuiteDialog.detach(service);
   }
 
 }

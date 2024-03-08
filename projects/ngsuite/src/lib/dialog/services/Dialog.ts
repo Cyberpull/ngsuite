@@ -8,11 +8,10 @@ import { NGSuiteDialogConfirmComponent } from "../popup/confirm/confirm.componen
 import { Observable, throwError } from "rxjs";
 
 const DialogInstances: NGSuiteDialogInstance[] = [];
+const DialogRootMap = new Map<NGSuiteDialog, NGSuiteDialogRoot>();
 
 @Injectable()
 export class NGSuiteDialog {
-
-  private root?: NGSuiteDialogRoot;
 
   constructor() {
     this.onEscape = this.onEscape.bind(this);
@@ -20,6 +19,15 @@ export class NGSuiteDialog {
 
     document.addEventListener('keydown', this.onEscape);
     document.addEventListener('click', this.onDocumentClick);
+  }
+
+  static attach(instance: NGSuiteDialog, root: NGSuiteDialogRoot) {
+    if (DialogRootMap.has(instance)) return;
+    DialogRootMap.set(instance, root);
+  }
+
+  static detach(instance: NGSuiteDialog) {
+    DialogRootMap.delete(instance);
   }
 
   private onEscape(e: KeyboardEvent) {
@@ -43,15 +51,10 @@ export class NGSuiteDialog {
     instance.focus();
   }
 
-  attach(root: NGSuiteDialogRoot) {
-    if (this.root) return;
-    this.root = root;
-  }
-
   open(component: NGSuiteComponent<any>, config?: NGSuiteDialogConfig):  NGSuiteDialogInstance {
     if(!config) config = null as any;
 
-    const { root } = this;
+    const root = DialogRootMap.get(this);
 
     if (!root) throw new Error(
       '"ngs-dialog-root" component not found. ' +
