@@ -35,14 +35,6 @@ import {
   ],
 
   exports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-
-    NGSuiteCoreModule,
-    // -----------------
     NGSuiteFormComponent,
     NGSuiteFormButtonComponent,
     NGSuiteFormFieldComponent,

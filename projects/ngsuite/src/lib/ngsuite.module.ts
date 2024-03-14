@@ -9,6 +9,7 @@ import { Registry } from './core/Registry';
 import { NGSuiteCoreModule, NGSuiteConfig } from './core';
 import { NGSuiteDialogModule } from './dialog';
 import { NGSuiteGuardModule } from './guard';
+import { NGSuiteFormModule } from "./form";
 
 import { NGSuiteRootComponent } from "./root";
 
@@ -23,18 +24,14 @@ import { NGSuiteRootComponent } from "./root";
     NGSuiteCoreModule,
     NGSuiteDialogModule,
     NGSuiteGuardModule,
+    NGSuiteFormModule,
   ],
 
   exports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-
     NGSuiteCoreModule,
     NGSuiteDialogModule,
     NGSuiteGuardModule,
+    NGSuiteFormModule,
 
     // Root Component
     NGSuiteRootComponent,

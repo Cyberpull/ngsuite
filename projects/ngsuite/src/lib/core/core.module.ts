@@ -29,12 +29,6 @@ import {
   ],
 
   exports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-
     NGSuiteIconComponent,
 
     NGSuitePanelComponent,

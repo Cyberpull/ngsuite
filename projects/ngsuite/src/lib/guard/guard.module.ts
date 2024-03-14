@@ -16,15 +16,7 @@ import { HttpClientModule } from "@angular/common/http";
     NGSuiteCoreModule,
   ],
 
-  exports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-
-    NGSuiteCoreModule,
-  ],
+  exports: [],
 
   declarations: [],
 })
