@@ -3,28 +3,26 @@
   position: fixed;
   top: 0px; bottom: 0px;
   left: 0px; right: 0px;
-  background-color: rgba(0, 0, 0, .3);
+  background-color: var(--ngs-dialog-backdrop-color) !important;
   visibility: visible !important;
-  z-index: 1030;
+  z-index: var(--ngs-dialog-z-index) !important;
 
   .ngs-dialog {
     &-wrapper {
       display: block;
-      width: 100% !important;
-      height: 100% !important;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-
-    &-table {
-      display: table;
-      width: 100% !important;
-      height: 100% !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      overflow: hidden auto;
     }
 
     &-view {
-      display: table-cell;
-      vertical-align: middle;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100% !important;
+      height: 100% !important;
+      padding: 30px 0px;
     }
   }
 }
