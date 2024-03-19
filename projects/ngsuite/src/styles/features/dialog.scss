@@ -16,4 +16,11 @@
   display: block;
   background-color: var(--ngs-dialog-background-color) !important;
   box-shadow: var(--ngs-dialog-box-shadow) !important;
+
+  [ngs-dialog-title] {
+    margin: 0px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
 }
