@@ -2,12 +2,12 @@
   <i [ngClass]="icon"></i>
 </div>
 
-<div ngs-flex class="middle">
+<div ngs-flex-x class="middle">
   <ng-content></ng-content>
 </div>
 
 <div class="right" *ngIf="closeBtn">
-  <a href="" (click)="close($event)" class="close">
-    <i class="fa fa-times"></i>
+  <a href="" (click)="close($event)" class="close-btn">
+    <i class="ngs-icon close"></i>
   </a>
 </div>

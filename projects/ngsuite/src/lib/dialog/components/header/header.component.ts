@@ -20,10 +20,7 @@ export class NGSuiteDialogHeaderComponent {
     @Inject(NGS_DIALOG_CONFIG) private config: NGSuiteDialogConfig,
   ) {
     this.xDialogRef = injector.get(NGSuiteDialogRef);
-
-    if (config && typeof(config.closeBtn) === 'boolean') {
-      this.closeBtn = config.closeBtn;
-    }
+    this.closeBtn = config.closeBtn !== false;
   }
 
   close(e: Event) {
