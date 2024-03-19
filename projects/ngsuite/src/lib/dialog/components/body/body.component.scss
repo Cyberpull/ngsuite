@@ -1,5 +1,7 @@
 :host {
   display: block;
   bottom: 0px;
-  padding: 20px;
+  padding: var(--ngs-dialog-padding) !important;
+  color: var(--ngs-dialog-text-color) !important;
+  background-color: var(--ngs-dialog-background-color) !important;
 }

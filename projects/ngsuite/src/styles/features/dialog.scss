@@ -2,11 +2,17 @@
   --ngs-dialog-backdrop-color: rgba(0, 0, 0, .3);
   --ngs-dialog-z-index: 1030;
 
+  --ngs-dialog-text-color: #333;
+  --ngs-dialog-header-text-color: #333;
+  --ngs-dialog-footer-text-color: #333;
+
+  --ngs-dialog-padding: 20px;
   --ngs-dialog-background-color: #FFF;
   --ngs-dialog-box-shadow: 0px 0px 5px rgba(0, 0, 0, .4);
+  --ngs-dialog-border: 1px solid var(--mbi-light);
 }
 
-.ngs-dialog-content {
+.ngs-dialog-box {
   display: block;
   background-color: var(--ngs-dialog-background-color) !important;
   box-shadow: var(--ngs-dialog-box-shadow) !important;

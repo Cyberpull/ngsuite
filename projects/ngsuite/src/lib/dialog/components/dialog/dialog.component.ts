@@ -49,7 +49,7 @@ export class NGSuiteDialogComponent implements AfterViewInit, OnDestroy {
     const { nativeElement } = this.componentRef.location as ElementRef<HTMLElement>;
 
     nativeElement.tabIndex = -1;
-    nativeElement.classList.add('ngs-dialog-content');
+    nativeElement.classList.add('ngs-dialog-box');
     nativeElement.focus();
 
     nativeElement.addEventListener('click', e => {
