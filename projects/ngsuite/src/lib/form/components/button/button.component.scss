@@ -1,4 +1,5 @@
-@import '../../../../styles/functions';
+@use '../../../../styles/variables' as vars;
+// @import '../../../../styles/functions';
 
 :host {
   --background: var(--ngs-light);
@@ -31,7 +32,7 @@
     width: 100%;
   }
 
-  @each $name, $value in $color {
+  @each $name, $value in vars.$color {
     &[#{$name}] {
       --red: calc(var(--ngs-#{$name}-red) * 0.2126);
       --green: calc(var(--ngs-#{$name}-green) * 0.7152);

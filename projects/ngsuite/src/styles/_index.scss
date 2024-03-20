@@ -1,6 +1,6 @@
-@import './variables';
-@import './functions';
-@import './mixins';
-@import './root';
+@use './variables';
+@use './functions';
+@use './mixins';
+@use './root';
 
-@import './features';
+@use './features';

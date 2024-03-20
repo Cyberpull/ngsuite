@@ -1,12 +1,12 @@
-@import './variables';
+@use './variables' as vars;
 
 @mixin ngs-device($key: md) {
   $width: 0;
 
-  @if map-has-key($device, $key) {
-    $width: map-get($device, $key);
+  @if map-has-key(vars.$device, $key) {
+    $width: map-get(vars.$device, $key);
   } @else {
-    $width: map-get($device, md);
+    $width: map-get(vars.$device, md);
   }
 
   @media (min-width: $width) {
