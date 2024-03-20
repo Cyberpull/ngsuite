@@ -46,8 +46,7 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
   submit() {
     const { formRef: { nativeElement} } = this;
-    const event = new Event('submit');
-    nativeElement.dispatchEvent(event);
+    nativeElement.requestSubmit();
   }
 
   reset() {
