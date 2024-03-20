@@ -97,6 +97,11 @@ export class NGSuiteDialog {
     return dialog.afterClosed;
   }
 
+  success(title: string, message: string) {
+    message = `<div class="mbi-success">${message}</div>`;
+    return this.alert(title, message);
+  }
+
   error(title: string, message: string) {
     message = `<div class="mbi-error">${message}</div>`;
     return this.alert(title, message);
