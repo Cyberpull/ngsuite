@@ -2,6 +2,9 @@
   --ngs-dialog-z-index: 1030;
   --ngs-dialog-backdrop-color: rgba(0, 0, 0, .3);
 
+  --ngs-dialog-closebtn-color: rgba(0, 0, 0, .7);
+  --ngs-dialog-closebtn-opacity: .7;
+
   --ngs-dialog-text-color: #333;
   --ngs-dialog-header-text-color: #333;
   --ngs-dialog-footer-text-color: #333;
@@ -19,7 +22,7 @@
 
   [ngs-dialog-title] {
     margin: 0px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     font-weight: 500;
   }

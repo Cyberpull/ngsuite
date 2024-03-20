@@ -19,11 +19,12 @@
     margin-left: 20px;
 
     a {
-      color: rgba(0, 0, 0, .5) !important;
+      color: var(--ngs-dialog-closebtn-color) !important;
+      opacity: var(--ngs-dialog-closebtn-opacity) !important;
       text-decoration: none !important;
 
       &:hover {
-        color: rgba(0, 0, 0, .7) !important;
+        --ngs-dialog-closebtn-opacity: 1;
       }
     }
   }
