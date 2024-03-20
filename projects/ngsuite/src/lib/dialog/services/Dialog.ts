@@ -91,7 +91,6 @@ export class NGSuiteDialog {
 
     const dialog = this.open(NGSuiteDialogAlertComponent, {
       backdropClose: false,
-      closeOnEsc: false,
       data
     });
 
