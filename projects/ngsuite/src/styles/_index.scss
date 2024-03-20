@@ -1,6 +1,6 @@
-@use './variables' as *;
-@use './functions' as *;
-@use './mixins' as *;
-@use './root' as *;
+@use './variables';
+@use './functions';
+@use './mixins';
+@use './root';
 
-@use './features' as *;
+@use './features';
