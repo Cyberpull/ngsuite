@@ -99,15 +99,8 @@ export class NGSuiteDialog {
   }
 
   error(title: string, message: string) {
-    const data: NGSuiteDialogPopupOptions = { title, message };
-
-    const dialog = this.open(NGSuiteDialogAlertComponent, {
-      backdropClose: false,
-      closeOnEsc: false,
-      data
-    });
-
-    return dialog.afterClosed;
+    message = `<div class="mbi-error">${message}</div>`;
+    return this.alert(title, message);
   }
 
   confirm(title: string, message: string): Observable<boolean> {
