@@ -1,15 +1,26 @@
+$default: #CCC !default;
+$primary: #02AFEE !default;
+$secondary: #6C757D !default;
+$error: #F00 !default;
+$danger: #DC3545 !default;
+$success: #090 !default;
+$warning: #FFC107 !default;
+$info: #0DCAF0 !default;
+$light: #F8F9FA !default;
+$dark: #212529 !default;
+
 $color: (
-  default: #CCC,
-  primary: #02AFEE,
-  secondary: #6C757D,
-  error: #F00,
-  danger: #DC3545,
-  success: #090,
-  warning: #FFC107,
-  info: #0DCAF0,
-  light: #F8F9FA,
-  dark: #212529,
-) !default;
+  default: $default,
+  primary: $primary,
+  secondary: $secondary,
+  error: $error,
+  danger: $danger,
+  success: $success,
+  warning: $warning,
+  info: $info,
+  light: $light,
+  dark: $dark,
+);
 
 $device: (
   xs: 375px,
@@ -17,4 +28,4 @@ $device: (
   md: 768px,
   lg: 992px,
   xl: 1200px,
-) !default;
+);
