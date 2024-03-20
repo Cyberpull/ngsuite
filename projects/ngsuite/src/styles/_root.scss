@@ -1,0 +1,12 @@
+@use './variables' as vars;
+
+:root {
+  @each $name, $value in vars.$color {
+    --ngs-#{$name}-red: #{red($value)};
+    --ngs-#{$name}-green: #{green($value)};
+    --ngs-#{$name}-blue: #{blue($value)};
+
+    --ngs-#{$name}-rgb: var(--ngs-#{$name}-red), var(--ngs-#{$name}-green), var(--ngs-#{$name}-blue);
+    --ngs-#{$name}: rgb(var(--ngs-#{$name}-rgb));
+  }
+}
