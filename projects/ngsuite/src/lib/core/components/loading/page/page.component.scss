@@ -11,7 +11,7 @@
   width: 100% !important;
   height: 100% !important;
 
-  &[data-visible="true"] {
+  &.visible {
     visibility: visible !important;
   }
 }
