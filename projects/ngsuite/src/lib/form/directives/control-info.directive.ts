@@ -1,14 +1,15 @@
-import { Directive, ElementRef } from "@angular/core";
+import { Directive, ElementRef, Input } from "@angular/core";
 
 import { NGSuiteFormComponent } from "../components/form/form.component";
-import { FormGroup } from "@angular/forms";
+import { stringAttribute } from "../functions";
 
 @Directive({
   selector: '[when]',
 })
 export class NGSuiteControlInfoDirective {
 
-  readonly name: string;
+  @Input({ alias: 'when', transform: stringAttribute, required: true })
+  readonly name!: string;
   
   readonly element: HTMLElement;
 
@@ -17,7 +18,6 @@ export class NGSuiteControlInfoDirective {
     private form: NGSuiteFormComponent
   ) {
     const { nativeElement } = el;
-    this.name = nativeElement.getAttribute('when')!;
     this.element = nativeElement;
   }
 
