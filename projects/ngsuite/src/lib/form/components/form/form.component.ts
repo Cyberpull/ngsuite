@@ -16,14 +16,11 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('form') readonly formRef: ElementRef<HTMLFormElement> = null as any;
 
-  readonly formGroup: FormGroup<any>;
-
   constructor(
     private cd: ChangeDetectorRef,
     readonly directive: FormGroupDirective
   ) {
     this.onSubmit = new EventEmitter();
-    this.formGroup = directive.form;
   }
 
   ngOnDestroy() {
@@ -39,10 +36,10 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
     e.preventDefault();
     e.stopPropagation();
 
-    const { formGroup, onSubmit } = this;
+    const { directive, onSubmit } = this;
 
-    if (formGroup.valid) {
-      onSubmit.emit(formGroup.value);
+    if (directive.valid) {
+      onSubmit.emit(directive.value);
     }
   }
 

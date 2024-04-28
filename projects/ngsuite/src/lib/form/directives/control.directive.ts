@@ -11,8 +11,6 @@ export class NGSuiteControlDirective {
   
   readonly element: HTMLElement;
 
-  readonly group: FormGroup;
-
   @Input({ alias: 'control', transform: stringAttribute, required: true })
   readonly name!: string;
 
@@ -22,12 +20,16 @@ export class NGSuiteControlDirective {
   ) {
     const { nativeElement } = el;
     this.element = nativeElement;
-    this.group = form.formGroup;
+  }
+
+  get formGroup() {
+    const { form: { directive } } = this;
+    return directive.form;
   }
 
   get entry() {
-    const { name, group } = this;
-    return group.get(name);
+    const { name, formGroup } = this;
+    return formGroup.get(name);
   }
 
 }

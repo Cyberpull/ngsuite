@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, OnDestroy, QueryList } from "@angular/core";
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChildren, OnDestroy, QueryList } from "@angular/core";
 
 import { NGSuiteControlDirective } from "../../../directives/control.directive";
 import { Subscription } from "rxjs";
@@ -10,7 +10,7 @@ import { NGSuiteFormMessagePendingComponent } from "./pending/pending.component"
   templateUrl: 'message.component.html',
   styleUrls: ['message.component.scss']
 })
-export class NGSuiteFormMessageComponent implements AfterContentInit, OnDestroy {
+export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewInit, OnDestroy {
 
   @ContentChildren(NGSuiteFormMessageErrorComponent) errorList: QueryList<NGSuiteFormMessageErrorComponent>;
   @ContentChildren(NGSuiteFormMessagePendingComponent) pendingList: QueryList<NGSuiteFormMessagePendingComponent>;
@@ -25,17 +25,13 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, OnDestroy 
   error?: string;
 
   constructor(
+    private cd: ChangeDetectorRef,
     private control: NGSuiteControlDirective,
   ) {
     this.errorList = new QueryList();
     this.pendingList = new QueryList();
 
     this.xErrorMap = new Map();
-    
-    if (control.entry) {
-      const { entry } = control;
-      this.xStatusSub = entry.statusChanges.subscribe(this.onChange);
-    }
   }
 
   private processInfoList = () => {
@@ -84,6 +80,16 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, OnDestroy 
     this.xErrorSub = errorList.changes.subscribe(this.processInfoList);
 
     this.processInfoList();
+  }
+
+  ngAfterViewInit(): void {
+    const { cd, control: { entry } } = this;
+
+    if (entry) {
+      this.xStatusSub = entry.statusChanges.subscribe(this.onChange);
+    }
+
+    cd.detectChanges();
   }
 
   ngOnDestroy(): void {
