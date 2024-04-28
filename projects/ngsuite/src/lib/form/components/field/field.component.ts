@@ -26,8 +26,6 @@ export class NGSuiteFormFieldComponent implements AfterViewInit, AfterContentIni
   ) {
     this.xStateChange = new BehaviorSubject<ValidationStatus>(null as any);
     this.statusChange = this.xStateChange.asObservable();
-
-    this.updateStatus = this.updateStatus.bind(this);
   }
 
   ngAfterViewInit() {
@@ -64,7 +62,7 @@ export class NGSuiteFormFieldComponent implements AfterViewInit, AfterContentIni
     }
   }
 
-  private updateStatus() {
+  private updateStatus = () => {
     const { xStateChange, input } = this;
 
     if (input) {

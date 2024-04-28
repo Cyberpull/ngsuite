@@ -12,9 +12,14 @@ import {
   NGSuiteFormFieldComponent,
   NGSuiteFormInputComponent,
   NGSuiteFormInputDefaultComponent,
+  NGSuiteFormMessageComponent,
+  NGSuiteFormMessageErrorComponent,
+  NGSuiteFormMessagePendingComponent,
 } from './components';
 
 import {
+  NGSuiteControlDirective,
+  NGSuiteControlInfoDirective,
   NGSuiteFormInputDirective,
 } from "./directives";
 
@@ -38,10 +43,15 @@ import {
     NGSuiteFormComponent,
     NGSuiteFormButtonComponent,
     NGSuiteFormFieldComponent,
+    NGSuiteFormMessageComponent,
+    NGSuiteFormMessageErrorComponent,
+    NGSuiteFormMessagePendingComponent,
     // -----------------
     NGSuiteFormInputComponent,
     // -----------------
     NGSuiteFormInputDirective,
+    NGSuiteControlDirective,
+    NGSuiteControlInfoDirective,
     // Validators ------
     NGSuiteMinValidator,
     NGSuiteMaxValidator,
@@ -51,11 +61,16 @@ import {
     NGSuiteFormComponent,
     NGSuiteFormButtonComponent,
     NGSuiteFormFieldComponent,
+    NGSuiteFormMessageComponent,
+    NGSuiteFormMessageErrorComponent,
+    NGSuiteFormMessagePendingComponent,
     // -----------------
     NGSuiteFormInputComponent,
     NGSuiteFormInputDefaultComponent,
     // -----------------
     NGSuiteFormInputDirective,
+    NGSuiteControlDirective,
+    NGSuiteControlInfoDirective,
     // Validators ------
     NGSuiteMinValidator,
     NGSuiteMaxValidator,
