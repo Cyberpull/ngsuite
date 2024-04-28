@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, Optional, Output, ViewChild } from "@angular/core";
 import { FormGroup, FormGroupDirective } from "@angular/forms";
 
 type AutoComplete = 'on' | 'off';
@@ -10,18 +10,20 @@ type AutoComplete = 'on' | 'off';
 })
 export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
-  @Input() formGroup: FormGroup = null as any;
   @Input() autocomplete: AutoComplete = 'off';
 
   @Output('submit') readonly onSubmit: EventEmitter<any>;
 
-  @ViewChild(FormGroupDirective) readonly directive: FormGroupDirective = null as any;
   @ViewChild('form') readonly formRef: ElementRef<HTMLFormElement> = null as any;
 
+  readonly formGroup: FormGroup<any>;
+
   constructor(
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    readonly directive: FormGroupDirective
   ) {
     this.onSubmit = new EventEmitter();
+    this.formGroup = directive.form;
   }
 
   ngOnDestroy() {
