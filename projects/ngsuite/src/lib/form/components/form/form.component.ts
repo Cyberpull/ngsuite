@@ -39,11 +39,6 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
     const { directive, onSubmit } = this;
 
-    if (directive.form) {
-      const { form } = directive;
-      form.updateValueAndValidity();
-    }
-
     if (directive.valid) {
       onSubmit.emit(directive.value);
     }
