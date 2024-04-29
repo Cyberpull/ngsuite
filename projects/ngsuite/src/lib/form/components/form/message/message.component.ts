@@ -49,10 +49,10 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   onChange = () => {
     this.info = undefined;
     
-    const { control: { group, entry } } = this;
+    const { control: { group, groupDirective, entry } } = this;
     
     if (!entry || !group) return;
-    if (!group.submitted || !entry.dirty) return;
+    if (!groupDirective.submitted || !entry.dirty) return;
 
     switch (true) {
       case entry.pending: {
