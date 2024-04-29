@@ -1,5 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, Optional, Output, ViewChild } from "@angular/core";
 import { FormGroup, FormGroupDirective } from "@angular/forms";
+import { BehaviorSubject, Observable } from "rxjs";
 
 type AutoComplete = 'on' | 'off';
 
@@ -16,18 +17,18 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('form') readonly formRef: ElementRef<HTMLFormElement> = null as any;
 
-  get submitted() {
-    const { formRef } = this;
-    if (!formRef) return false;
-
-    const { nativeElement: { classList } } = formRef;
-    return classList.contains('ng-submitted');
-  }
+  readonly submitted: Observable<boolean>;
+  private xSubmittedSub: BehaviorSubject<boolean>;
+  
+  get isSubmitted() { return this.xSubmittedSub.value; }
 
   constructor(
     private cd: ChangeDetectorRef,
     readonly directive: FormGroupDirective
   ) {
+    this.xSubmittedSub = new BehaviorSubject(false);
+    this.submitted = this.xSubmittedSub.asObservable();
+
     this.onSubmit = new EventEmitter();
   }
 
@@ -45,7 +46,9 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
     e.preventDefault();
     e.stopPropagation();
 
-    const { directive, onSubmit } = this;
+    const { directive, xSubmittedSub, onSubmit } = this;
+
+    xSubmittedSub.next(true);
 
     if (directive.valid) {
       onSubmit.emit(directive.value);
@@ -64,9 +67,10 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
   }
 
   reset() {
-    const { directive, formRef: { nativeElement} } = this;
+    const { directive, formRef: { nativeElement}, xSubmittedSub } = this;
     nativeElement.reset();
     directive.resetForm();
+    xSubmittedSub.next(false);
   }
 
 }

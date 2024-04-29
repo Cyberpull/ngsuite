@@ -20,12 +20,13 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
 
   info?: NGSuiteFormMessageErrorComponent | NGSuiteFormMessagePendingComponent;
   
+  private xFormSub: Subscription;
   private xStatusSub?: Subscription;
   private xErrorSub?: Subscription;
 
   error?: string;
 
-  get submitted() { return this.control.form.submitted }
+  get submitted() { return this.control.form.isSubmitted; }
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -35,6 +36,8 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
     this.pendingList = new QueryList();
 
     this.xErrorMap = new Map();
+
+    this.xFormSub = control.form.submitted.subscribe(this.onChange);
   }
 
   private processInfoList = () => {
@@ -87,7 +90,7 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   }
 
   ngAfterViewInit(): void {
-    const { cd, control: { entry } } = this;
+    const { cd, control: { group, entry } } = this;
 
     if (entry) {
       this.xStatusSub = entry.statusChanges.subscribe(this.onChange);
@@ -97,8 +100,9 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   }
 
   ngOnDestroy(): void {
-    const { xStatusSub, xErrorSub } = this;
+    const { xFormSub, xStatusSub, xErrorSub } = this;
 
+    xFormSub.unsubscribe();
     if (xStatusSub) xStatusSub.unsubscribe();
     if (xErrorSub) xErrorSub.unsubscribe();
   }
