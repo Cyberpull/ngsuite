@@ -33,7 +33,7 @@ export class NGSuiteControlDirective {
 
   get entry() {
     const { name, group } = this;
-    return group.get(name);
+    return group?.get(name) || null;
   }
 
 }
