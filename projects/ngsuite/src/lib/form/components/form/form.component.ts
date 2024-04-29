@@ -16,6 +16,9 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('form') readonly formRef: ElementRef<HTMLFormElement> = null as any;
 
+  get submitted() { return this.xSubmitted; }
+  private xSubmitted: boolean = false;
+
   constructor(
     private cd: ChangeDetectorRef,
     readonly directive: FormGroupDirective
@@ -37,6 +40,8 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
     e.preventDefault();
     e.stopPropagation();
 
+    this.xSubmitted = true;
+
     const { directive, onSubmit } = this;
 
     if (directive.valid) {
@@ -51,6 +56,7 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
   reset() {
     const { directive, formRef: { nativeElement} } = this;
+    this.xSubmitted = false;
     nativeElement.reset();
     directive.resetForm();
   }

@@ -15,7 +15,7 @@ export class NGSuiteControlDirective {
 
   constructor(
     private el: ElementRef<HTMLElement>,
-    private form: NGSuiteFormComponent
+    readonly form: NGSuiteFormComponent
   ) {
     const { nativeElement } = el;
     this.element = nativeElement;
