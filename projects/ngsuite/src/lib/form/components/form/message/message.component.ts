@@ -25,6 +25,8 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
 
   error?: string;
 
+  get submitted() { return this.control.form.submitted }
+
   constructor(
     private cd: ChangeDetectorRef,
     private control: NGSuiteControlDirective,
@@ -49,12 +51,9 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   onChange = () => {
     this.info = undefined;
     
-    const { control: { form, group, groupDirective, entry } } = this;
+    const { control: { group, entry } } = this;
     
     if (!entry || !group) return;
-
-    const shouldProcessChange = form.submitted || entry.dirty;
-    if (!shouldProcessChange) return;
 
     switch (true) {
       case entry.pending: {
