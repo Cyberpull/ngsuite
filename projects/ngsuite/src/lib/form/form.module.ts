@@ -26,6 +26,7 @@ import {
 import {
   NGSuiteMinValidator,
   NGSuiteMaxValidator,
+  NGSuiteEqualsValidator,
 } from './validators';
 
 @NgModule({
@@ -36,7 +37,7 @@ import {
     ReactiveFormsModule,
     HttpClientModule,
 
-    NGSuiteCoreModule
+    NGSuiteCoreModule,
   ],
 
   exports: [
@@ -53,6 +54,7 @@ import {
     NGSuiteControlDirective,
     NGSuiteControlInfoDirective,
     // Validators ------
+    NGSuiteEqualsValidator,
     NGSuiteMinValidator,
     NGSuiteMaxValidator,
   ],
@@ -72,6 +74,7 @@ import {
     NGSuiteControlDirective,
     NGSuiteControlInfoDirective,
     // Validators ------
+    NGSuiteEqualsValidator,
     NGSuiteMinValidator,
     NGSuiteMaxValidator,
   ]
