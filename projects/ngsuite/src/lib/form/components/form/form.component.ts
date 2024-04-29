@@ -28,7 +28,8 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    const { cd } = this;
+    const { cd, directive } = this;
+
     cd.detectChanges();
   }
 

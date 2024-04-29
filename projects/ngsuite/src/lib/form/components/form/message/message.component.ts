@@ -4,6 +4,7 @@ import { NGSuiteControlDirective } from "../../../directives/control.directive";
 import { Subscription } from "rxjs";
 import { NGSuiteFormMessageErrorComponent } from "./error/error.component";
 import { NGSuiteFormMessagePendingComponent } from "./pending/pending.component";
+import { NGSuiteFormComponent } from "../form.component";
 
 @Component({
   selector: 'ngs-form-message',
@@ -48,8 +49,10 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   onChange = () => {
     this.info = undefined;
     
-    const { control: { entry } } = this;
-    if (!entry) return;
+    const { control: { group, entry } } = this;
+    
+    if (!entry || !group) return;
+    if (!group.submitted || !entry.dirty) return;
 
     switch (true) {
       case entry.pending: {

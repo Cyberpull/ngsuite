@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Input } from "@angular/core";
 
 import { NGSuiteFormComponent } from "../components/form/form.component";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, FormGroupDirective } from "@angular/forms";
 import { stringAttribute } from "../functions";
 
 @Directive({
@@ -16,10 +16,13 @@ export class NGSuiteControlDirective {
 
   constructor(
     private el: ElementRef<HTMLElement>,
-    private form: NGSuiteFormComponent
+    private form: NGSuiteFormComponent,
+    readonly group: FormGroupDirective
   ) {
     const { nativeElement } = el;
     this.element = nativeElement;
+    console.log('Form Group Directive', form.directive);
+    console.log('Form Group:', group);
   }
 
   get formGroup() {
