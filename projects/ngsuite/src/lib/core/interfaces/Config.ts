@@ -1,3 +1,4 @@
+import { InjectionToken } from '@angular/core';
 import { NGSuiteComponent } from './Component';
 
 export interface NGSuiteConfig {
@@ -23,3 +24,5 @@ export interface NGSuiteConfig {
 
   [key: string]: any;
 }
+
+export const NGS_CONFIG = new InjectionToken<NGSuiteConfig>("NGSuite");

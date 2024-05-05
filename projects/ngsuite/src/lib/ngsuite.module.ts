@@ -6,7 +6,7 @@ import { RouterModule } from "@angular/router";
 
 import { Registry } from './core/Registry';
 
-import { NGSuiteCoreModule, NGSuiteConfig } from './core';
+import { NGSuiteCoreModule, NGSuiteConfig, NGS_CONFIG } from './core';
 import { NGSuiteDialogModule } from './dialog';
 import { NGSuiteGuardModule } from './guard';
 import { NGSuiteFormModule } from "./form";
@@ -49,7 +49,8 @@ export class NGSuiteModule {
     return {
       ngModule: NGSuiteModule,
       providers: Registry.entries([
-        { provide: 'NGSuite', useValue: config }
+        { provide: 'NGSuite', useValue: config },
+        { provide: NGS_CONFIG, useValue: config },
       ])
     };
   }
