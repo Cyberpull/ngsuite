@@ -41,19 +41,19 @@ export class NGSuiteLoadingRootComponent implements OnDestroy {
   private onTextChange = (value: string) => {
     const { cd } = this;
     this.xText = value;
-    cd.detectChanges();
+    cd.markForCheck();
   }
 
   private onShowingChange = (value: boolean) => {
     const { cd } = this;
     this.xShowing = value;
-    cd.detectChanges();
+    cd.markForCheck();
   }
 
   private onCountChange = (value: number) => {
     const { cd } = this;
     this.xCounter = value;
-    cd.detectChanges();
+    cd.markForCheck();
   }
 
 }
