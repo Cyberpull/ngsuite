@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, inject } from "@angular/core";
 import { NGSuiteLoading } from "../../../services";
 import { Subscription } from "rxjs";
 
@@ -8,6 +8,9 @@ import { Subscription } from "rxjs";
   styleUrls: ['root.component.scss']
 })
 export class NGSuiteLoadingRootComponent implements OnDestroy {
+
+  private readonly cd = inject(ChangeDetectorRef);
+  private readonly loading = inject(NGSuiteLoading);
 
   get text() { return this.xText; }
   get showing() { return this.xShowing; }
@@ -21,18 +24,36 @@ export class NGSuiteLoadingRootComponent implements OnDestroy {
   private xShowingSub: Subscription;
   private xCounterSub: Subscription;
 
-  constructor(
-    private loading: NGSuiteLoading
-  ) {
-    this.xTextSub = loading.text.subscribe(value => this.xText = value);
-    this.xShowingSub = loading.showing.subscribe(value => this.xShowing = value);
-    this.xCounterSub = loading.count.subscribe(value => this.xCounter = value);
+  constructor() {
+    const { loading } = this;
+
+    this.xTextSub = loading.text.subscribe(this.onTextChange);
+    this.xShowingSub = loading.showing.subscribe(this.onShowingChange);
+    this.xCounterSub = loading.count.subscribe(this.onCountChange);
   }
 
   ngOnDestroy(): void {
     this.xTextSub.unsubscribe();
     this.xShowingSub.unsubscribe();
     this.xCounterSub.unsubscribe();
+  }
+
+  private onTextChange = (value: string) => {
+    const { cd } = this;
+    this.xText = value;
+    cd.detectChanges();
+  }
+
+  private onShowingChange = (value: boolean) => {
+    const { cd } = this;
+    this.xShowing = value;
+    cd.detectChanges();
+  }
+
+  private onCountChange = (value: number) => {
+    const { cd } = this;
+    this.xCounter = value;
+    cd.detectChanges();
   }
 
 }
