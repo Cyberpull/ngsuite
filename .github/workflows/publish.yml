@@ -11,6 +11,8 @@ jobs:
     environment: production
     env:
       TOKEN: ${{ secrets.NPM_TOKEN }}
+      ID_NAME: ${{ secrets.ID_NAME }}
+      ID_EMAIL: ${{ secrets.ID_EMAIL }}
       LIB_VERSION: ${{ github.ref_name }}
     strategy:
       matrix:
