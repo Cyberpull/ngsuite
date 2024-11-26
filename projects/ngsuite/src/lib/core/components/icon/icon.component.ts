@@ -1,10 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { Icon } from '../../interfaces';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'ngs-icon',
   templateUrl: 'icon.component.html',
-  styleUrls: ['icon.component.scss']
+  styleUrls: ['icon.component.scss'],
+  standalone: true,
+  imports: [
+    NgClass,
+  ],
 })
 export class NGSuiteIconComponent {
 

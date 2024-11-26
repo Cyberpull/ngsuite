@@ -1,11 +1,27 @@
 import { Component, Inject } from "@angular/core";
+
 import { NGSuiteDialogPopupOptions, NGS_DIALOG_DATA } from "../../interfaces";
 import { NGSuiteDialogRef } from "../../services";
+import { NGSuiteFormButtonComponent } from "../../../form";
+
+import {
+  NGSuiteDialogBodyComponent,
+  NGSuiteDialogFooterComponent,
+  NGSuiteDialogHeaderComponent,
+} from "../../components";
+
 
 @Component({
   selector: 'ngs-dialog-alert',
   templateUrl: 'alert.component.html',
-  styleUrls: ['alert.component.scss']
+  styleUrls: ['alert.component.scss'],
+  standalone: true,
+  imports: [
+    NGSuiteDialogHeaderComponent,
+    NGSuiteDialogBodyComponent,
+    NGSuiteDialogFooterComponent,
+    NGSuiteFormButtonComponent,
+  ],
 })
 export class NGSuiteDialogAlertComponent {
 

@@ -1,8 +1,10 @@
 <button class="button" [type]="type" [disabled]="disabled">
   <div class="wrapper">
-    <div class="icon" *ngIf="icon">
-      <ngs-icon [name]="icon"></ngs-icon>
-    </div>
+    @if (icon) {
+      <div class="icon">
+        <ngs-icon [name]="icon"></ngs-icon>
+      </div>
+    }
 
     <div class="content">
       <div>

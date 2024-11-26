@@ -5,10 +5,7 @@
     <ng-content></ng-content>
   </div>
 
-  <ngs-icon
-    class="refresh"
-    [name]="{ type: 'sharp', name: 'refresh' }"
-    (click)="onRefresh()"
-    *ngIf="refresh.observers.length"
-  ></ngs-icon>
+  @if (refresh.observers.length) {
+    <ngs-icon class="refresh" [name]="{ type: 'sharp', name: 'refresh' }" (click)="onRefresh()"></ngs-icon>
+  }
 </div>

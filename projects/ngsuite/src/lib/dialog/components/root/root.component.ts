@@ -5,7 +5,9 @@ import { NGSuiteDialog } from "../../services";
 @Component({
   selector: 'ngs-dialog-root',
   templateUrl: 'root.component.html',
-  styleUrls: ['root.component.scss']
+  styleUrls: ['root.component.scss'],
+  standalone: true,
+  imports: [],
 })
 export class NGSuiteDialogRootComponent implements NGSuiteDialogRoot, OnDestroy {
 

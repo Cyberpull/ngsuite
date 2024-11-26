@@ -5,7 +5,9 @@ import { NGSuiteFormMessageComponent } from "../message.component";
 @Component({
   selector: 'ngs-message-error',
   templateUrl: 'error.component.html',
-  styleUrls: ['error.component.scss']
+  styleUrls: ['error.component.scss'],
+  standalone: true,
+  imports: [],
 })
 export class NGSuiteFormMessageErrorComponent {
 
@@ -15,5 +17,5 @@ export class NGSuiteFormMessageErrorComponent {
     private message: NGSuiteFormMessageComponent,
     readonly when: NGSuiteControlInfoDirective
   ) {}
-  
+
 }

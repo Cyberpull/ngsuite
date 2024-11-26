@@ -1,6 +1,6 @@
 import { ApplicationRef, ComponentRef, createComponent, createEnvironmentInjector, Injectable } from "@angular/core";
 import { NGSuiteLoadingRootComponent } from "../components";
-import { Registry } from "../Registry";
+import { Registry } from "../../Registry";
 import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable()

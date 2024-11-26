@@ -1,11 +1,16 @@
 import { Component, Injector, Inject, Input } from "@angular/core";
 import { NGSuiteDialogConfig, NGS_DIALOG_CONFIG } from "../../interfaces";
 import { NGSuiteDialogRef } from "../../services/DialogRef";
+import { NgClass } from "@angular/common";
 
 @Component({
   selector: 'ngs-dialog-header',
   templateUrl: 'header.component.html',
-  styleUrls: ['header.component.scss']
+  styleUrls: ['header.component.scss'],
+  standalone: true,
+  imports: [
+    NgClass,
+  ],
 })
 export class NGSuiteDialogHeaderComponent {
 

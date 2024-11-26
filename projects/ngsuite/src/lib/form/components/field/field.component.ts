@@ -8,7 +8,9 @@ type ValidationStatus = 'VALID' | 'INVALID' | 'DISABLED' | 'PENDING';
 @Component({
   selector: 'ngs-form-field',
   templateUrl: 'field.component.html',
-  styleUrls: ['field.component.scss']
+  styleUrls: ['field.component.scss'],
+  standalone: true,
+  imports: [],
 })
 export class NGSuiteFormFieldComponent implements AfterViewInit, AfterContentInit, OnDestroy {
 

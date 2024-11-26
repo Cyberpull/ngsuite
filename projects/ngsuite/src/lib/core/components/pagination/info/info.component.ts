@@ -1,12 +1,17 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Pagination } from "../../../interfaces";
+import { NgClass } from "@angular/common";
 
 const LinkCount = 10;
 
 @Component({
   selector: 'ngs-pagination-info',
   templateUrl: 'info.component.html',
-  styleUrls: ['info.component.scss']
+  styleUrls: ['info.component.scss'],
+  standalone: true,
+  imports: [
+    NgClass,
+  ],
 })
 export class NGSuitePaginationInfoComponent {
 

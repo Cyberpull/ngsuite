@@ -2,7 +2,8 @@ import { Directive, ElementRef } from "@angular/core";
 import { NgControl } from "@angular/forms";
 
 @Directive({
-  selector: '[formControl], [formControlName], [ngModel]'
+  selector: '[formControl], [formControlName], [ngModel]',
+  standalone: true,
 })
 export class NGSuiteFormInputDirective {
 

@@ -3,7 +3,8 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
 
 @Directive({
   selector: 'ngs-input[type=number][max][formControlName],ngs-input[type=number][max][formControl],ngs-input[type=number][max][ngModel]',
-  providers: [{ provide: NG_VALIDATORS, useExisting: NGSuiteMaxValidator, multi: true }]
+  providers: [{ provide: NG_VALIDATORS, useExisting: NGSuiteMaxValidator, multi: true }],
+  standalone: true,
 })
 export class NGSuiteMaxValidator implements Validator {
 

@@ -3,7 +3,8 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
 
 @Directive({
   selector: 'ngs-input[type=number][min][formControlName],ngs-input[type=number][min][formControl],ngs-input[type=number][min][ngModel]',
-  providers: [{ provide: NG_VALIDATORS, useExisting: NGSuiteMinValidator, multi: true }]
+  providers: [{ provide: NG_VALIDATORS, useExisting: NGSuiteMinValidator, multi: true }],
+  standalone: true,
 })
 export class NGSuiteMinValidator implements Validator {
 

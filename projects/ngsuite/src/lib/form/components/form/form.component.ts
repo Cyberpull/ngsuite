@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, Optional, Output, ViewChild } from "@angular/core";
-import { FormGroup, FormGroupDirective } from "@angular/forms";
+import { FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BehaviorSubject, Observable } from "rxjs";
 
 type AutoComplete = 'on' | 'off';
@@ -7,7 +7,12 @@ type AutoComplete = 'on' | 'off';
 @Component({
   selector: 'ngs-form',
   templateUrl: 'form.component.html',
-  styleUrls: ['form.component.scss']
+  styleUrls: ['form.component.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
@@ -19,7 +24,7 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
   readonly submitted: Observable<boolean>;
   private xSubmittedSub: BehaviorSubject<boolean>;
-  
+
   get isSubmitted() { return this.xSubmittedSub.value; }
 
   constructor(

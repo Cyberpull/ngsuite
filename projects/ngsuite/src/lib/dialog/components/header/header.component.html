@@ -1,13 +1,17 @@
-<div class="left" *ngIf="icon">
-  <i [ngClass]="icon"></i>
-</div>
+@if (icon) {
+  <div class="left">
+    <i [ngClass]="icon"></i>
+  </div>
+}
 
 <div ngs-flex-x class="middle">
   <ng-content></ng-content>
 </div>
 
-<div class="right" *ngIf="closeBtn">
-  <a href="" (click)="close($event)" class="close-btn">
-    <i class="ngs-icon close"></i>
-  </a>
-</div>
+@if (closeBtn) {
+  <div class="right">
+    <a href="" (click)="close($event)" class="close-btn">
+      <i class="ngs-icon close"></i>
+    </a>
+  </div>
+}

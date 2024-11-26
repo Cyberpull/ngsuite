@@ -10,7 +10,8 @@ import { stringAttribute } from "../functions/attributes";
       useExisting: NGSuiteEqualsValidator,
       multi: true
     }
-  ]
+  ],
+  standalone: true,
 })
 export class NGSuiteEqualsValidator implements Validator {
 

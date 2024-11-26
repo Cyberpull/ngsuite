@@ -1,10 +1,14 @@
 import { Component, ElementRef, Input } from "@angular/core";
-import { Icon } from "../../../core";
+import { Icon, NGSuiteIconComponent } from "../../../core";
 
 @Component({
   selector: 'ngs-button',
   templateUrl: 'button.component.html',
-  styleUrls: ['button.component.scss']
+  styleUrls: ['button.component.scss'],
+  standalone: true,
+  imports: [
+    NGSuiteIconComponent,
+  ],
 })
 export class NGSuiteFormButtonComponent {
 

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Subscriber } from "rxjs";
-import { Registry } from "../../core/Registry";
+import { Registry } from "../../Registry";
 import { NGSuiteDialogCommand } from "../interfaces/Dialog";
 
 @Injectable()

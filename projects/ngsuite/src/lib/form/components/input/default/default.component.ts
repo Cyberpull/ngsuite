@@ -1,10 +1,16 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild } from "@angular/core";
 import { FormInput, FormInputOnChange, FormInputOnInit, FormInputOnTouched } from "../../../interfaces";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
   selector: 'ngs-input-defaut',
   templateUrl: 'default.component.html',
-  styleUrls: ['default.component.scss']
+  styleUrls: ['default.component.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class NGSuiteFormInputDefaultComponent implements FormInput<HTMLInputElement>, AfterViewInit {
 

@@ -5,9 +5,10 @@ import { stringAttribute } from "../functions";
 
 @Directive({
   selector: '[control]',
+  standalone: true,
 })
 export class NGSuiteControlDirective {
-  
+
   readonly element: HTMLElement;
 
   @Input({ alias: 'control', transform: stringAttribute, required: true })

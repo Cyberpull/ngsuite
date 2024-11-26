@@ -1,41 +1,49 @@
 <div class="wrapper">
-  <div class="switch" [ngSwitch]="type">
-    <select
-      class="input"
-      *ngSwitchCase="'select'"
-      [ngModel]="value"
-      (ngModelChange)="onChange($event)"
-      (focusin)="isFocused = true"
-      (focusout)="isFocused = false"
-    >
-      <option [value]="entry.value" *ngFor="let entry of entries">{{ entry.label }}</option>
-    </select>
+  <div class="switch">
+    @switch (type) {
+      @case ('select') {
+        <select
+          class="input"
+          [ngModel]="value"
+          (ngModelChange)="onChange($event)"
+          (focusin)="isFocused = true"
+          (focusout)="isFocused = false"
+        >
+          <option [value]="entry.value" *ngFor="let entry of entries">{{ entry.label }}</option>
+        </select>
+      }
 
-    <textarea
-      class="input"
-      *ngSwitchCase="'textarea'"
-      [autocomplete]="autocomplete"
-      [ngModel]="value"
-      (ngModelChange)="onChange($event)"
-      (focusin)="isFocused = true"
-      (focusout)="isFocused = false"
-    ></textarea>
+      @case ('textarea') {
+        <textarea
+          class="input"
+          [autocomplete]="autocomplete"
+          [ngModel]="value"
+          (ngModelChange)="onChange($event)"
+          (focusin)="isFocused = true"
+          (focusout)="isFocused = false"
+        ></textarea>
+      }
 
-    <input
-      class="input"
-      *ngSwitchDefault
-      [type]="type"
-      [autocomplete]="autocomplete"
-      [ngModel]="value"
-      (ngModelChange)="onChange($event)"
-      (focusin)="isFocused = true"
-      (focusout)="isFocused = false"
-    >
+      @default {
+        <input
+          class="input"
+          *ngSwitchDefault
+          [type]="type"
+          [autocomplete]="autocomplete"
+          [ngModel]="value"
+          (ngModelChange)="onChange($event)"
+          (focusin)="isFocused = true"
+          (focusout)="isFocused = false"
+        >
+      }
+    }
   </div>
 
   <ng-content></ng-content>
 
-  <div #placeholder class="label" [ngClass]="{'active': isActive}" *ngIf="label">
-    <span>{{ label }}</span>
-  </div>
+  @if (label) {
+    <div #placeholder class="label" [ngClass]="{'active': isActive}">
+      <span>{{ label }}</span>
+    </div>
+  }
 </div>

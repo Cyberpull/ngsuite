@@ -4,7 +4,9 @@ import { NGSuiteFormMessageComponent } from "../message.component";
 @Component({
   selector: 'ngs-message-pending',
   templateUrl: 'pending.component.html',
-  styleUrls: ['pending.component.scss']
+  styleUrls: ['pending.component.scss'],
+  standalone: true,
+  imports: [],
 })
 export class NGSuiteFormMessagePendingComponent {
 
@@ -13,5 +15,5 @@ export class NGSuiteFormMessagePendingComponent {
   constructor(
     private message: NGSuiteFormMessageComponent
   ) {}
-  
+
 }

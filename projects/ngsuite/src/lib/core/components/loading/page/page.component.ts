@@ -5,7 +5,9 @@ import { NGSuiteLoadingAnimationComponent } from "../animation/animation.compone
 @Component({
   selector: 'ngs-loading-page',
   templateUrl: 'page.component.html',
-  styleUrls: ['page.component.scss']
+  styleUrls: ['page.component.scss'],
+  standalone: true,
+  imports: [],
 })
 export class NGSuiteLoadingPageComponent implements AfterViewInit {
 

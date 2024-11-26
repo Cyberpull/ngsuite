@@ -2,7 +2,7 @@
  * Public API Surface of angular
  */
 
-export * from './lib/ngsuite.module';
+export * from './lib/Providers';
 
 export * from './lib/core';
 export * from './lib/form';

@@ -6,7 +6,9 @@ import { NGSuiteDialogRef } from "../../services/DialogRef";
 @Component({
   selector: 'ngs-dialog',
   templateUrl: 'dialog.component.html',
-  styleUrls: ['dialog.component.scss']
+  styleUrls: ['dialog.component.scss'],
+  standalone: true,
+  imports: [],
 })
 export class NGSuiteDialogComponent implements AfterViewInit, OnDestroy {
 

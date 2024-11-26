@@ -1,4 +1,5 @@
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChildren, OnDestroy, QueryList } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 import { NGSuiteControlDirective } from "../../../directives/control.directive";
 import { Subscription } from "rxjs";
@@ -9,7 +10,11 @@ import { NGSuiteFormComponent } from "../form.component";
 @Component({
   selector: 'ngs-form-message',
   templateUrl: 'message.component.html',
-  styleUrls: ['message.component.scss']
+  styleUrls: ['message.component.scss'],
+  standalone: true,
+  imports: [
+    NgTemplateOutlet,
+  ],
 })
 export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewInit, OnDestroy {
 
@@ -19,7 +24,7 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   private xErrorMap: Map<string, NGSuiteFormMessageErrorComponent>;
 
   info?: NGSuiteFormMessageErrorComponent | NGSuiteFormMessagePendingComponent;
-  
+
   private xFormSub: Subscription;
   private xStatusSub?: Subscription;
   private xErrorSub?: Subscription;
@@ -42,7 +47,7 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
 
   private processInfoList = () => {
     const { errorList, xErrorMap } = this;
-    
+
     xErrorMap.clear();
 
     errorList.forEach(error => {
@@ -53,9 +58,9 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
 
   onChange = () => {
     this.info = undefined;
-    
+
     const { control: { group, entry } } = this;
-    
+
     if (!entry || !group) return;
 
     switch (true) {
@@ -63,7 +68,7 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
         const { pendingList } = this;
         this.info = pendingList.first;
       } break;
-      
+
       case !!entry?.errors: {
         const { errors } = entry;
         const { xErrorMap } = this;
@@ -76,7 +81,7 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
             break;
           }
         }
-    
+
       } break;
     }
   }

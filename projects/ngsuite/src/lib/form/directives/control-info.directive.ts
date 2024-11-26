@@ -5,12 +5,13 @@ import { stringAttribute } from "../functions";
 
 @Directive({
   selector: '[when]',
+  standalone: true,
 })
 export class NGSuiteControlInfoDirective {
 
   @Input({ alias: 'when', transform: stringAttribute, required: true })
   readonly name!: string;
-  
+
   readonly element: HTMLElement;
 
   constructor(

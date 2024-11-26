@@ -1,11 +1,16 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Inject, Injector, Input, ViewChild, ViewContainerRef } from "@angular/core";
 import { NGSuiteConfig } from "../../../interfaces";
 import { NGSuiteLoadingAnimationComponent } from "../animation/animation.component";
+import { NgClass } from "@angular/common";
 
 @Component({
   selector: 'ngs-loading-section',
   templateUrl: 'section.component.html',
-  styleUrls: ['section.component.scss']
+  styleUrls: ['section.component.scss'],
+  standalone: true,
+  imports: [
+    NgClass,
+  ],
 })
 export class NGSuiteLoadingSectionComponent implements AfterViewInit {
 

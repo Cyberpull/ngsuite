@@ -1,10 +1,11 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ComponentFactoryResolver, ComponentRef, ElementRef, forwardRef, Injector, Input, OnDestroy, Optional, QueryList, ViewChild, ViewChildren, ViewContainerRef } from "@angular/core";
-import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { NGSuiteComponent } from "../../../core";
 import { FormInputMap, FormInput, FormInputOnChange, FormInputOnTouched, InputSelectEntry } from "../../interfaces";
 
 import { NGSuiteFormInputDefaultComponent } from "./default/default.component";
+import { NgClass } from "@angular/common";
 
 const InputComponents: FormInputMap = {};
 
@@ -18,7 +19,13 @@ const InputComponents: FormInputMap = {};
       useExisting: forwardRef(() => NGSuiteFormInputComponent),
       multi: true
     }
-  ]
+  ],
+  standalone: true,
+  imports: [
+    NgClass,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class NGSuiteFormInputComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
 

@@ -3,7 +3,7 @@ import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Rout
 import { Subscription } from "rxjs";
 import { filter } from "rxjs/operators";
 import { NGSuiteLoading } from "./Loading";
-import { Registry } from "../Registry";
+import { Registry } from "../../Registry";
 
 @Injectable()
 export class NGSuiteRouteLoading {

@@ -1,11 +1,16 @@
 import { ChangeDetectorRef, Component, OnDestroy, inject } from "@angular/core";
 import { NGSuiteLoading } from "../../../services";
 import { Subscription } from "rxjs";
+import { NGSuiteLoadingPageComponent } from "../page/page.component";
 
 @Component({
   selector: 'ngs-loading-root',
   templateUrl: 'root.component.html',
-  styleUrls: ['root.component.scss']
+  styleUrls: ['root.component.scss'],
+  standalone: true,
+  imports: [
+    NGSuiteLoadingPageComponent,
+  ],
 })
 export class NGSuiteLoadingRootComponent implements OnDestroy {
 

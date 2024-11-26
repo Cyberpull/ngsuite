@@ -1,11 +1,26 @@
 import { Component, Inject } from "@angular/core";
+
 import { NGSuiteDialogRef } from "../../services";
 import { NGSuiteDialogPopupOptions, NGS_DIALOG_DATA } from "../../interfaces";
+import { NGSuiteFormButtonComponent } from "../../../form";
+
+import {
+  NGSuiteDialogBodyComponent,
+  NGSuiteDialogFooterComponent,
+  NGSuiteDialogHeaderComponent,
+} from "../../components";
 
 @Component({
   selector: 'ngs-dialog-confirm',
   templateUrl: 'confirm.component.html',
-  styleUrls: ['confirm.component.scss']
+  styleUrls: ['confirm.component.scss'],
+  standalone: true,
+  imports: [
+    NGSuiteDialogHeaderComponent,
+    NGSuiteDialogBodyComponent,
+    NGSuiteDialogFooterComponent,
+    NGSuiteFormButtonComponent,
+  ],
 })
 export class NGSuiteDialogConfirmComponent {
 

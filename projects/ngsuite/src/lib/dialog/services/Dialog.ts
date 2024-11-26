@@ -1,5 +1,5 @@
 import { ApplicationRef, ComponentRef, createComponent, createEnvironmentInjector, Injectable } from "@angular/core";
-import { Registry } from "../../core/Registry";
+import { Registry } from "../../Registry";
 import { NGSuiteComponent } from "../../core";
 import { NGSuiteDialogConfig, NGSuiteDialogPopupOptions, NGSuiteDialogRoot } from "../interfaces";
 import { NGSuiteDialogInstance } from "./DialogInstance";
