@@ -1,5 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, Inject, Injector, Input, ViewChild, ViewContainerRef } from "@angular/core";
-import { NGSuiteConfig } from "../../../interfaces";
+import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, ElementRef, inject, Injector, Input, ViewChild, ViewContainerRef } from "@angular/core";
+import { NGS_CONFIG } from "../../../interfaces/Config";
 import { NGSuiteLoadingAnimationComponent } from "../animation/animation.component";
 import { NgClass } from "@angular/common";
 
@@ -14,6 +14,10 @@ import { NgClass } from "@angular/common";
 })
 export class NGSuiteLoadingSectionComponent implements AfterViewInit {
 
+  private readonly injector =  inject(Injector);
+  private readonly cd =  inject(ChangeDetectorRef);
+  private readonly config = inject(NGS_CONFIG);
+
   private componentRef?: ComponentRef<any>;
 
   @ViewChild('container', {
@@ -21,12 +25,6 @@ export class NGSuiteLoadingSectionComponent implements AfterViewInit {
   }) viewContainerRef?: ViewContainerRef;
 
   @Input() loading: boolean = false;
-
-  constructor(
-    private injector: Injector,
-    private cd: ChangeDetectorRef,
-    @Inject('NGSuite') private config: NGSuiteConfig
-  ) {  }
 
   ngAfterViewInit() {
     const { viewContainerRef, config, cd } = this;
