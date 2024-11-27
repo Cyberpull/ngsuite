@@ -1,4 +1,6 @@
+@use '../variables' as v;
+
 :root {
-  --ngs-loading-background: rgba(0, 0, 0, .5);
-  --ngs-loading-z-index: 1000;
+  --ngs-loading-background: #{v.$loading-background};
+  --ngs-loading-z-index: #{v.$loading-z-index};
 }

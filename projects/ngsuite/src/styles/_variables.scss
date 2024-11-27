@@ -29,3 +29,28 @@ $device: (
   lg: 992px,
   xl: 1200px,
 );
+
+$backdrop: rgba(0, 0, 0, .3) !default;
+
+// BEGIN: Loading Variables
+$loading-background: $backdrop !default;
+$loading-z-index: 1000 !default;
+// END: Loading Variables
+
+
+// BEGIN: Dialog Variables
+$dialog-z-index: 1030 !default;
+$dialog-backdrop-color: $backdrop !default;
+
+$dialog-closebtn-color: rgba(0, 0, 0, .7) !default;
+$dialog-closebtn-opacity: .7 !default;
+
+$dialog-text-color: #333 !default;
+$dialog-header-text-color: #333 !default;
+$dialog-footer-text-color: #333 !default;
+
+$dialog-padding: 20px !default;
+$dialog-background-color: #FFF !default;
+$dialog-box-shadow: 0px 0px 5px rgba(0, 0, 0, .4) !default;
+$dialog-border: 1px solid $light !default;
+// END: Dialog Variables
