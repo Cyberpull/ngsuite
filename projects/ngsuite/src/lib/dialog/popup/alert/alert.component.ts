@@ -1,6 +1,6 @@
-import { Component, Inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 
-import { NGSuiteDialogPopupOptions, NGS_DIALOG_DATA } from "../../interfaces";
+import { NGS_DIALOG_DATA } from "../../interfaces";
 import { NGSuiteDialogRef } from "../../services";
 import { NGSuiteFormButtonComponent } from "../../../form";
 
@@ -9,6 +9,8 @@ import {
   NGSuiteDialogFooterComponent,
   NGSuiteDialogHeaderComponent,
 } from "../../components";
+
+import { NGSuiteDialogConfirmComponent } from "../confirm/confirm.component";
 
 
 @Component({
@@ -25,13 +27,11 @@ import {
 })
 export class NGSuiteDialogAlertComponent {
 
+  private readonly dialogRef = inject(NGSuiteDialogRef<NGSuiteDialogConfirmComponent>);
+  private readonly data = inject(NGS_DIALOG_DATA);
+
   get title() { return this.data.title; }
   get message() { return this.data.message; }
-
-  constructor(
-    private dialogRef: NGSuiteDialogRef<NGSuiteDialogAlertComponent>,
-    @Inject(NGS_DIALOG_DATA) private data: NGSuiteDialogPopupOptions
-  ) {  }
 
   accept() {
     const { dialogRef } = this;

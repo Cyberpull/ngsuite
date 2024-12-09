@@ -1,6 +1,8 @@
-<ngs-dialog-header *ngIf="title">
-  <h1 ngs-dialog-title>{{ title }}</h1>
-</ngs-dialog-header>
+@if (title) {
+  <ngs-dialog-header>
+    <h1 ngs-dialog-title>{{ title }}</h1>
+  </ngs-dialog-header>
+}
 
 <ngs-dialog-body>
   <div [innerHTML]="message"></div>

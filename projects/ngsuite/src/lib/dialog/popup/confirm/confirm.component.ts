@@ -1,7 +1,7 @@
-import { Component, Inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 
 import { NGSuiteDialogRef } from "../../services";
-import { NGSuiteDialogPopupOptions, NGS_DIALOG_DATA } from "../../interfaces";
+import { NGS_DIALOG_DATA } from "../../interfaces";
 import { NGSuiteFormButtonComponent } from "../../../form";
 
 import {
@@ -24,13 +24,11 @@ import {
 })
 export class NGSuiteDialogConfirmComponent {
 
+  private readonly dialogRef = inject(NGSuiteDialogRef<NGSuiteDialogConfirmComponent>);
+  private readonly data = inject(NGS_DIALOG_DATA);
+
   get title() { return this.data.title; }
   get message() { return this.data.message; }
-
-  constructor(
-    private dialogRef: NGSuiteDialogRef<NGSuiteDialogConfirmComponent>,
-    @Inject(NGS_DIALOG_DATA) private data: NGSuiteDialogPopupOptions
-  ) {  }
 
   accept() {
     const { dialogRef } = this;
