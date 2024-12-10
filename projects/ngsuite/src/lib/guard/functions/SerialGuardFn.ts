@@ -1,14 +1,14 @@
-import { Injector, StaticProvider } from "@angular/core";
+import { Injector } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivateChildFn, CanActivateFn, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { from, Observable, of, switchMap } from "rxjs";
-import { GuardEntry, SerialGuardInfo } from "../interfaces";
+import { GuardEntry, GuardProvider, SerialGuardInfo } from "../interfaces";
 import { GuardDataService } from "../services";
 
 export function SerialGuardFn(info: SerialGuardInfo): CanActivateFn | CanActivateChildFn {
-  const providers: StaticProvider[] = [];
+  const providers: GuardProvider[] = [];
 
-  if (info.providers) providers.push(...info.providers as unknown as StaticProvider[]);
-  providers.push(...info.entries as unknown as StaticProvider[]);
+  if (info.providers) providers.push(...info.providers);
+  providers.push(...info.entries as unknown as GuardProvider[]);
 
   return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree => {
     const data = new GuardDataService();
