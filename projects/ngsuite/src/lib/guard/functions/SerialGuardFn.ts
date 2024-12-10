@@ -1,4 +1,4 @@
-import { Injector } from "@angular/core";
+import { inject, Injector } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivateChildFn, CanActivateFn, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { from, Observable, of, switchMap } from "rxjs";
 import { GuardEntry, GuardProvider, SerialGuardInfo } from "../interfaces";
@@ -13,9 +13,11 @@ export function SerialGuardFn(info: SerialGuardInfo): CanActivateFn | CanActivat
   return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree => {
     const data = new GuardDataService();
 
+    const parent = inject(Injector);
+
     const injector = Injector.create({
-      // parent: NGSuiteCoreModule.injector,
       providers,
+      parent,
     });
 
     let result: boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree>;
