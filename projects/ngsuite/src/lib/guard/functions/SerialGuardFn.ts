@@ -8,6 +8,7 @@ export function SerialGuardFn(info: SerialGuardInfo): CanActivateFn | CanActivat
   const providers: GuardProvider[] = [];
 
   if (info.providers) providers.push(...info.providers);
+  providers.push(...info.entries);
 
   return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree => {
     const data = new GuardDataService();
