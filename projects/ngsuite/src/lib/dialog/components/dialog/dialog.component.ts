@@ -79,6 +79,7 @@ export class NGSuiteDialogComponent implements AfterViewInit, OnDestroy {
   }
 
   focus() {
+    if (!this.componentRef) return;
     const { nativeElement } = this.componentRef.location as ElementRef<HTMLElement>;
     nativeElement.focus();
   }
