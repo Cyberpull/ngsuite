@@ -34,12 +34,12 @@ $backdrop: rgba(0, 0, 0, .3) !default;
 
 // BEGIN: Loading Variables
 $loading-background: $backdrop !default;
-$loading-z-index: 1000 !default;
+$loading-z-index: 2000 !default;
 // END: Loading Variables
 
 
 // BEGIN: Dialog Variables
-$dialog-z-index: 1030 !default;
+$dialog-z-index: 1500 !default;
 $dialog-backdrop-color: $backdrop !default;
 
 $dialog-closebtn-color: rgba(0, 0, 0, .7) !default;
