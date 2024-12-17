@@ -33,21 +33,20 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
   @Input() autocomplete: AutoComplete = 'off';
 
-  @Output('submit') readonly onSubmit: EventEmitter<any>;
+  @Output('submit') readonly onSubmit = new EventEmitter();
 
   @ViewChild('form') readonly formRef!: ElementRef<HTMLFormElement>;
 
-  readonly submitted: Observable<boolean>;
-  private xSubmittedSub: BehaviorSubject<boolean>;
+  private readonly xSubmittedSub = new BehaviorSubject<boolean>(false);
+  readonly submitted = this.xSubmittedSub.asObservable();
 
   get isSubmitted() { return this.xSubmittedSub.value; }
 
-  constructor() {
-    this.xSubmittedSub = new BehaviorSubject(false);
-    this.submitted = this.xSubmittedSub.asObservable();
-
-    this.onSubmit = new EventEmitter();
-  }
+  get dirty() { return this.directive.dirty; }
+  get touched() { return this.directive.touched; }
+  get untouched() { return this.directive.untouched; }
+  get valueChanges() { return this.directive.valueChanges; }
+  get statusChanges() { return this.directive.statusChanges; }
 
   ngOnDestroy() {
     //
@@ -85,9 +84,9 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
   reset() {
     const { directive, formRef: { nativeElement}, xSubmittedSub } = this;
+    xSubmittedSub.next(false);
     nativeElement.reset();
     directive.resetForm();
-    xSubmittedSub.next(false);
   }
 
 }

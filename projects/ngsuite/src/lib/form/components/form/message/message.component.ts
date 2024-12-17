@@ -40,6 +40,7 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
 
   private xFormSub: Subscription;
   private xStatusSub?: Subscription;
+  private xValueSub?: Subscription;
   private xErrorSub?: Subscription;
 
   error?: string;
@@ -82,12 +83,18 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
     viewContainerRef.createEmbeddedView(content.template);
   }
 
+  private clear = () => {
+    const { viewContainerRef } = this;
+
+    if (viewContainerRef) {
+      viewContainerRef.clear();
+    }
+  }
+
   onChange = () => {
-    const { group, entry, viewContainerRef, xErrorMap } = this;
+    const { group, entry, xErrorMap } = this;
 
-    if (!viewContainerRef) return;
-
-    viewContainerRef.clear();
+    this.clear();
 
     if (!entry || !group) return;
 
@@ -106,6 +113,7 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
 
       if (info) {
         this.attach(info);
+        console.log('Attaching:', info);
         break;
       }
     }
@@ -124,15 +132,17 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
       const { group, entry } = this;
 
       if (entry) {
+        this.xValueSub = entry.valueChanges.subscribe(this.onChange);
         this.xStatusSub = entry.statusChanges.subscribe(this.onChange);
       }
     });
   }
 
   ngOnDestroy(): void {
-    const { xFormSub, xStatusSub, xErrorSub } = this;
+    const { xFormSub, xValueSub, xStatusSub, xErrorSub } = this;
 
     xFormSub.unsubscribe();
+    if (xValueSub) xValueSub.unsubscribe();
     if (xStatusSub) xStatusSub.unsubscribe();
     if (xErrorSub) xErrorSub.unsubscribe();
   }
