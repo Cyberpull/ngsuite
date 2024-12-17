@@ -68,6 +68,7 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
     errorList.forEach(error => {
       const { when } = error;
       xErrorMap.set(when, error);
+      console.log('Error Message:', error);
     });
   }
 
@@ -94,9 +95,13 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   onChange = () => {
     const { group, entry, xErrorMap } = this;
 
+    console.log('On Change Start');
+
     this.clear();
 
     if (!entry || !group) return;
+
+    console.log('Entry and group exist');
 
     if (entry.pending) {
       const { pendingList } = this;
@@ -106,7 +111,11 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
 
     if (!entry.errors) return;
 
+    console.log('Errors exist');
+
     const { errors } = entry;
+
+    console.log('Error Messages:', errors);
 
     for (const key in errors) {
       const info = xErrorMap.get(key);
