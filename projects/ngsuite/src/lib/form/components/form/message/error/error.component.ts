@@ -1,5 +1,4 @@
-import { Component, ElementRef, inject, Input, TemplateRef, ViewChild } from "@angular/core";
-import { NGSuiteControlInfoDirective } from "../../../../directives/control-info.directive";
+import { Component, ElementRef, inject, Input, TemplateRef, ViewChild, ViewContainerRef, ViewRef } from "@angular/core";
 import { NGSuiteFormMessageComponent } from "../message.component";
 import { stringAttribute } from "../../../../functions";
 
@@ -12,13 +11,14 @@ import { stringAttribute } from "../../../../functions";
 })
 export class NGSuiteFormMessageErrorComponent {
 
-  private readonly elemRef: ElementRef<HTMLElement> = inject(ElementRef);
   private readonly message = inject(NGSuiteFormMessageComponent);
+
+  readonly view = inject(ViewContainerRef);
+  readonly elemRef: ElementRef<HTMLElement> = inject(ElementRef);
+  readonly element = this.elemRef.nativeElement;
 
   @Input({ transform: stringAttribute, required: true })
   readonly when!: string;
-
-  readonly element = this.elemRef.nativeElement;
 
   @ViewChild('template') readonly template!: TemplateRef<HTMLElement>;
 

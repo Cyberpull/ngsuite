@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from "@angular/core";
+import { Component, inject, TemplateRef, ViewChild, ViewContainerRef } from "@angular/core";
 import { NGSuiteFormMessageComponent } from "../message.component";
 
 @Component({
@@ -9,6 +9,8 @@ import { NGSuiteFormMessageComponent } from "../message.component";
   imports: [],
 })
 export class NGSuiteFormMessagePendingComponent {
+
+  readonly view = inject(ViewContainerRef);
 
   @ViewChild('template') readonly template!: TemplateRef<HTMLElement>;
 

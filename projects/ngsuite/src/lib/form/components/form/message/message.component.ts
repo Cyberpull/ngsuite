@@ -1,34 +1,42 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChildren, inject, Input, OnDestroy, QueryList } from "@angular/core";
+import { AfterContentInit, AfterViewInit, Component, ComponentRef, ContentChildren, inject, Injector, Input, OnDestroy, QueryList, ViewChild, ViewContainerRef } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
 import { Subscription } from "rxjs";
 import { NGSuiteFormMessageErrorComponent } from "./error/error.component";
 import { NGSuiteFormMessagePendingComponent } from "./pending/pending.component";
 import { NGSuiteFormComponent } from "../form.component";
+import { NGSuiteComponent } from "../../../../core/interfaces/Component";
 import { stringAttribute } from "../../../functions";
+
+type MessageInfo = NGSuiteFormMessageErrorComponent | NGSuiteFormMessagePendingComponent;
 
 @Component({
   selector: 'ngs-form-message',
   templateUrl: 'message.component.html',
   styleUrls: ['message.component.scss'],
   standalone: true,
-  imports: [
-    NgTemplateOutlet,
-  ],
+  imports: [],
 })
 export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewInit, OnDestroy {
 
+  private readonly injector = inject(Injector);
   private readonly form = inject(NGSuiteFormComponent);
 
   @Input({ alias: 'for', transform: stringAttribute, required: true })
   control!: string;
 
-  @ContentChildren(NGSuiteFormMessageErrorComponent) errorList = new QueryList<NGSuiteFormMessageErrorComponent>();
-  @ContentChildren(NGSuiteFormMessagePendingComponent) pendingList = new QueryList<NGSuiteFormMessagePendingComponent>();
+  @ViewChild('container', { read: ViewContainerRef })
+  viewContainerRef!: ViewContainerRef;
+
+  private componentRef?: ComponentRef<any>;
+
+  @ContentChildren(NGSuiteFormMessageErrorComponent)
+  errorList = new QueryList<NGSuiteFormMessageErrorComponent>();
+
+  @ContentChildren(NGSuiteFormMessagePendingComponent)
+  pendingList = new QueryList<NGSuiteFormMessagePendingComponent>();
 
   private xErrorMap = new Map<string, NGSuiteFormMessageErrorComponent>();
-
-  info?: NGSuiteFormMessageErrorComponent | NGSuiteFormMessagePendingComponent;
 
   private xFormSub: Subscription;
   private xStatusSub?: Subscription;
@@ -62,33 +70,42 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
     });
   }
 
-  onChange = () => {
-    this.info = undefined;
+  private getComponent = (content: MessageInfo): NGSuiteComponent => {
+    switch (true) {
+      case content instanceof NGSuiteFormMessagePendingComponent: return NGSuiteFormMessagePendingComponent;
+      default: return NGSuiteFormMessageErrorComponent;
+    }
+  }
 
-    const { group, entry } = this;
+  private attach = (content: MessageInfo) => {
+    const { viewContainerRef } = this;
+    viewContainerRef.createEmbeddedView(content.template);
+  }
+
+  onChange = () => {
+    const { group, entry, viewContainerRef, xErrorMap } = this;
+
+    viewContainerRef.clear();
 
     if (!entry || !group) return;
 
-    switch (true) {
-      case entry.pending: {
-        const { pendingList } = this;
-        this.info = pendingList.first;
-      } break;
+    if (entry.pending) {
+      const { pendingList } = this;
+      this.attach(pendingList.first);
+      return;
+    }
 
-      case !!entry?.errors: {
-        const { errors } = entry;
-        const { xErrorMap } = this;
+    if (!entry.errors) return;
 
-        for (const key in errors) {
-          const info = xErrorMap.get(key);
+    const { errors } = entry;
 
-          if (info) {
-            this.info = info;
-            break;
-          }
-        }
+    for (const key in errors) {
+      const info = xErrorMap.get(key);
 
-      } break;
+      if (info) {
+        this.attach(info);
+        break;
+      }
     }
   }
 
