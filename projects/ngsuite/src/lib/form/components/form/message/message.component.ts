@@ -47,9 +47,9 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
 
   get submitted() { return this.form.isSubmitted; }
 
-  readonly groupDirective = this.form.directive;
+  get groupDirective() { return this.form.directive; }
 
-  readonly group = this.groupDirective.form;
+  get group() { return this.groupDirective.form; }
 
   get entry() {
     const { control, group } = this;
@@ -68,7 +68,6 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
     errorList.forEach(error => {
       const { when } = error;
       xErrorMap.set(when, error);
-      console.log('Error Message:', error);
     });
   }
 
