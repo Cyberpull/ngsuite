@@ -57,8 +57,8 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
     xErrorMap.clear();
 
     errorList.forEach(error => {
-      const { when: { name } } = error;
-      xErrorMap.set(name, error);
+      const { when } = error;
+      xErrorMap.set(when, error);
     });
   }
 
