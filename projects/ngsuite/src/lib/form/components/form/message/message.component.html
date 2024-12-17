@@ -1,4 +1,6 @@
-<ng-container [ngTemplateOutlet]="info?.template || null" *ngIf="submitted"></ng-container>
+@if (submitted) {
+  <ng-container [ngTemplateOutlet]="info?.template || null"></ng-container>
+}
 
 <ng-template>
   <ng-content></ng-content>

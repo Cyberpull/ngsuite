@@ -1,5 +1,17 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, Optional, Output, ViewChild } from "@angular/core";
-import { FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  Output,
+  ViewChild,
+} from "@angular/core";
+
+import { FormGroupDirective, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BehaviorSubject, Observable } from "rxjs";
 
 type AutoComplete = 'on' | 'off';
@@ -16,21 +28,21 @@ type AutoComplete = 'on' | 'off';
 })
 export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
+  private readonly cd = inject(ChangeDetectorRef);
+  readonly directive = inject(FormGroupDirective);
+
   @Input() autocomplete: AutoComplete = 'off';
 
   @Output('submit') readonly onSubmit: EventEmitter<any>;
 
-  @ViewChild('form') readonly formRef: ElementRef<HTMLFormElement> = null as any;
+  @ViewChild('form') readonly formRef!: ElementRef<HTMLFormElement>;
 
   readonly submitted: Observable<boolean>;
   private xSubmittedSub: BehaviorSubject<boolean>;
 
   get isSubmitted() { return this.xSubmittedSub.value; }
 
-  constructor(
-    private cd: ChangeDetectorRef,
-    readonly directive: FormGroupDirective
-  ) {
+  constructor() {
     this.xSubmittedSub = new BehaviorSubject(false);
     this.submitted = this.xSubmittedSub.asObservable();
 

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input } from "@angular/core";
+import { Directive, ElementRef, inject, Input } from "@angular/core";
 
 import { NGSuiteFormComponent } from "../components/form/form.component";
 import { stringAttribute } from "../functions";
@@ -9,18 +9,14 @@ import { stringAttribute } from "../functions";
 })
 export class NGSuiteControlDirective {
 
-  readonly element: HTMLElement;
+  private readonly el: ElementRef<HTMLElement> = inject(ElementRef);
+
+  readonly form = inject(NGSuiteFormComponent);
+
+  readonly element = this.el.nativeElement;
 
   @Input({ alias: 'control', transform: stringAttribute, required: true })
   readonly name!: string;
-
-  constructor(
-    private el: ElementRef<HTMLElement>,
-    readonly form: NGSuiteFormComponent
-  ) {
-    const { nativeElement } = el;
-    this.element = nativeElement;
-  }
 
   get groupDirective() {
     const { form: { directive } } = this;

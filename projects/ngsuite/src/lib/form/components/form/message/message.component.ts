@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChildren, OnDestroy, QueryList } from "@angular/core";
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChildren, inject, OnDestroy, QueryList } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
 import { NGSuiteControlDirective } from "../../../directives/control.directive";
@@ -18,6 +18,9 @@ import { NGSuiteFormComponent } from "../form.component";
 })
 export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewInit, OnDestroy {
 
+  private readonly cd = inject(ChangeDetectorRef);
+  private readonly control = inject(NGSuiteControlDirective);
+
   @ContentChildren(NGSuiteFormMessageErrorComponent) errorList: QueryList<NGSuiteFormMessageErrorComponent>;
   @ContentChildren(NGSuiteFormMessagePendingComponent) pendingList: QueryList<NGSuiteFormMessagePendingComponent>;
 
@@ -33,16 +36,13 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
 
   get submitted() { return this.control.form.isSubmitted; }
 
-  constructor(
-    private cd: ChangeDetectorRef,
-    private control: NGSuiteControlDirective,
-  ) {
+  constructor() {
     this.errorList = new QueryList();
     this.pendingList = new QueryList();
 
     this.xErrorMap = new Map();
 
-    this.xFormSub = control.form.submitted.subscribe(this.onChange);
+    this.xFormSub = this.control.form.submitted.subscribe(this.onChange);
   }
 
   private processInfoList = () => {
