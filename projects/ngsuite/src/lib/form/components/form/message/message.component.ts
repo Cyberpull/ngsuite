@@ -71,13 +71,6 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
     });
   }
 
-  private getComponent = (content: MessageInfo): NGSuiteComponent => {
-    switch (true) {
-      case content instanceof NGSuiteFormMessagePendingComponent: return NGSuiteFormMessagePendingComponent;
-      default: return NGSuiteFormMessageErrorComponent;
-    }
-  }
-
   private attach = (content: MessageInfo) => {
     const { viewContainerRef } = this;
     viewContainerRef.createEmbeddedView(content.template);
@@ -94,13 +87,9 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   onChange = () => {
     const { group, entry, xErrorMap } = this;
 
-    console.log('On Change Start');
-
     this.clear();
 
     if (!entry || !group) return;
-
-    console.log('Entry and group exist');
 
     if (entry.pending) {
       const { pendingList } = this;
@@ -110,18 +99,13 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
 
     if (!entry.errors) return;
 
-    console.log('Errors exist');
-
     const { errors } = entry;
-
-    console.log('Error Messages:', errors);
 
     for (const key in errors) {
       const info = xErrorMap.get(key);
 
       if (info) {
         this.attach(info);
-        console.log('Attaching:', info);
         break;
       }
     }
