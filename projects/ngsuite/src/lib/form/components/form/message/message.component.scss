@@ -1,12 +1,4 @@
 :host {
   display: block;
   font-size: 12px;
-
-  > .error {
-    color: var(--ngs-error);
-  }
-
-  > .pending {
-    color: #333;
-  }
 }
