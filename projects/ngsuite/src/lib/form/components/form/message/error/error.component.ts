@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from "@angular/core";
+import { Component, inject, TemplateRef, ViewChild } from "@angular/core";
 import { NGSuiteControlInfoDirective } from "../../../../directives/control-info.directive";
 import { NGSuiteFormMessageComponent } from "../message.component";
 
@@ -11,11 +11,9 @@ import { NGSuiteFormMessageComponent } from "../message.component";
 })
 export class NGSuiteFormMessageErrorComponent {
 
-  @ViewChild('template') readonly template!: TemplateRef<HTMLElement>;
+  private readonly message = inject(NGSuiteFormMessageComponent);
+  readonly when = inject(NGSuiteControlInfoDirective);
 
-  constructor(
-    private message: NGSuiteFormMessageComponent,
-    readonly when: NGSuiteControlInfoDirective
-  ) {}
+  @ViewChild('template') readonly template!: TemplateRef<HTMLElement>;
 
 }

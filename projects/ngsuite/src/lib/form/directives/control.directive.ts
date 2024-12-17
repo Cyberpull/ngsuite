@@ -18,15 +18,9 @@ export class NGSuiteControlDirective {
   @Input({ alias: 'control', transform: stringAttribute, required: true })
   readonly name!: string;
 
-  get groupDirective() {
-    const { form: { directive } } = this;
-    return directive;
-  }
+  readonly groupDirective = this.form.directive;
 
-  get group() {
-    const { groupDirective } = this;
-    return groupDirective.form;
-  }
+  readonly group = this.groupDirective.form;
 
   get entry() {
     const { name, group } = this;

@@ -1,11 +1,11 @@
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChildren, inject, OnDestroy, QueryList } from "@angular/core";
+import { AfterContentInit, AfterViewInit, Component, ContentChildren, inject, Input, OnDestroy, QueryList } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
-import { NGSuiteControlDirective } from "../../../directives/control.directive";
 import { Subscription } from "rxjs";
 import { NGSuiteFormMessageErrorComponent } from "./error/error.component";
 import { NGSuiteFormMessagePendingComponent } from "./pending/pending.component";
 import { NGSuiteFormComponent } from "../form.component";
+import { stringAttribute } from "../../../functions";
 
 @Component({
   selector: 'ngs-form-message',
@@ -18,13 +18,15 @@ import { NGSuiteFormComponent } from "../form.component";
 })
 export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewInit, OnDestroy {
 
-  private readonly cd = inject(ChangeDetectorRef);
-  private readonly control = inject(NGSuiteControlDirective);
+  private readonly form = inject(NGSuiteFormComponent);
 
-  @ContentChildren(NGSuiteFormMessageErrorComponent) errorList: QueryList<NGSuiteFormMessageErrorComponent>;
-  @ContentChildren(NGSuiteFormMessagePendingComponent) pendingList: QueryList<NGSuiteFormMessagePendingComponent>;
+  @Input({ alias: 'for', transform: stringAttribute, required: true })
+  control!: string;
 
-  private xErrorMap: Map<string, NGSuiteFormMessageErrorComponent>;
+  @ContentChildren(NGSuiteFormMessageErrorComponent) errorList = new QueryList<NGSuiteFormMessageErrorComponent>();
+  @ContentChildren(NGSuiteFormMessagePendingComponent) pendingList = new QueryList<NGSuiteFormMessagePendingComponent>();
+
+  private xErrorMap = new Map<string, NGSuiteFormMessageErrorComponent>();
 
   info?: NGSuiteFormMessageErrorComponent | NGSuiteFormMessagePendingComponent;
 
@@ -34,15 +36,19 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
 
   error?: string;
 
-  get submitted() { return this.control.form.isSubmitted; }
+  get submitted() { return this.form.isSubmitted; }
+
+  readonly groupDirective = this.form.directive;
+
+  readonly group = this.groupDirective.form;
+
+  get entry() {
+    const { control, group } = this;
+    return group?.get(control) || null;
+  }
 
   constructor() {
-    this.errorList = new QueryList();
-    this.pendingList = new QueryList();
-
-    this.xErrorMap = new Map();
-
-    this.xFormSub = this.control.form.submitted.subscribe(this.onChange);
+    this.xFormSub = this.form.submitted.subscribe(this.onChange);
   }
 
   private processInfoList = () => {
@@ -59,7 +65,7 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   onChange = () => {
     this.info = undefined;
 
-    const { control: { group, entry } } = this;
+    const { group, entry } = this;
 
     if (!entry || !group) return;
 
@@ -95,13 +101,13 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   }
 
   ngAfterViewInit(): void {
-    const { cd, control: { group, entry } } = this;
+    window.setTimeout(() => {
+      const { group, entry } = this;
 
-    if (entry) {
-      this.xStatusSub = entry.statusChanges.subscribe(this.onChange);
-    }
-
-    cd.detectChanges();
+      if (entry) {
+        this.xStatusSub = entry.statusChanges.subscribe(this.onChange);
+      }
+    });
   }
 
   ngOnDestroy(): void {
