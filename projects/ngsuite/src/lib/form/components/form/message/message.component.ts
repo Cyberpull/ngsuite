@@ -85,6 +85,8 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   onChange = () => {
     const { group, entry, viewContainerRef, xErrorMap } = this;
 
+    if (!viewContainerRef) return;
+
     viewContainerRef.clear();
 
     if (!entry || !group) return;
