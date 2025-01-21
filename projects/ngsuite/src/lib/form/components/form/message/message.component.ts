@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, ComponentRef, ContentChildren, inject, Injector, Input, OnDestroy, QueryList, ViewChild, ViewContainerRef } from "@angular/core";
+import { AfterContentInit, AfterViewInit, Component, ComponentRef, computed, ContentChildren, inject, Injector, input, Input, OnDestroy, QueryList, ViewChild, ViewContainerRef } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
 import { Subscription } from "rxjs";
@@ -7,6 +7,7 @@ import { NGSuiteFormMessagePendingComponent } from "./pending/pending.component"
 import { NGSuiteFormComponent } from "../form.component";
 import { NGSuiteComponent } from "../../../../core/interfaces/Component";
 import { stringAttribute } from "../../../functions";
+import { AbstractControl, FormControl } from "@angular/forms";
 
 type MessageInfo = NGSuiteFormMessageErrorComponent | NGSuiteFormMessagePendingComponent;
 
@@ -22,8 +23,19 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   private readonly injector = inject(Injector);
   private readonly form = inject(NGSuiteFormComponent);
 
-  @Input({ alias: 'for', transform: stringAttribute, required: true })
-  control!: string;
+  readonly for = input.required<string | AbstractControl>();
+
+  readonly entry = computed(() => {
+    const prop = this.for();
+    if (!prop) return null;
+
+    if (typeof (prop) === 'string') {
+      const form = this.form.directive.form;
+      return form.controls[prop];
+    }
+
+    return prop;
+  });
 
   @ViewChild('container', { read: ViewContainerRef })
   viewContainerRef!: ViewContainerRef;
@@ -46,15 +58,6 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   error?: string;
 
   get submitted() { return this.form.isSubmitted; }
-
-  get groupDirective() { return this.form.directive; }
-
-  get group() { return this.groupDirective.form; }
-
-  get entry() {
-    const { control, group } = this;
-    return group?.get(control) || null;
-  }
 
   constructor() {
     this.xFormSub = this.form.submitted.subscribe(this.onChange);
@@ -85,11 +88,13 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   }
 
   onChange = () => {
-    const { group, entry, xErrorMap } = this;
+    const { xErrorMap } = this;
+
+    const entry = this.entry();
 
     this.clear();
 
-    if (!entry || !group) return;
+    if (!entry) return;
 
     if (entry.pending) {
       const { pendingList } = this;
@@ -121,7 +126,7 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
 
   ngAfterViewInit(): void {
     window.setTimeout(() => {
-      const { group, entry } = this;
+      const entry = this.entry();
 
       if (entry) {
         this.xValueSub = entry.valueChanges.subscribe(this.onChange);
