@@ -23,7 +23,7 @@ export class NGSuiteFormMessageComponent implements AfterContentInit, AfterViewI
   private readonly injector = inject(Injector);
   private readonly form = inject(NGSuiteFormComponent);
 
-  readonly for = input.required<string | AbstractControl>();
+  readonly for = input<string | AbstractControl>('');
 
   readonly entry = computed(() => {
     const prop = this.for();
