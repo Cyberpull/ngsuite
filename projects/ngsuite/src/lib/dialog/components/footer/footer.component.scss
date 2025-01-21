@@ -6,6 +6,7 @@
   background-color: var(--ngs-dialog-background-color) !important;
   border-top: var(--ngs-dialog-border) !important;
   padding: calc(var(--ngs-dialog-padding) * .5) var(--ngs-dialog-padding) !important;
+  z-index: 20;
 
   > .wrapper {
     display: flex;
