@@ -36,7 +36,7 @@ export class NGSuiteFormComponent implements AfterViewInit, OnDestroy {
 
   readonly autocomplete = input('off');
 
-  readonly onSubmit = output({ alias: 'submit' });
+  readonly onSubmit = output<any>({ alias: 'submit' });
 
   readonly formRef = viewChild.required<ElementRef<HTMLFormElement>>('form');
 
