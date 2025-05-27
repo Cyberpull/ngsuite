@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, inject, Inject, Injector, Input, ViewChild, ViewContainerRef } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, HostBinding, inject, Inject, Injector, input, Input, ViewChild, ViewContainerRef } from "@angular/core";
 import { NGS_CONFIG } from "../../../interfaces/Config";
 import { NGSuiteLoadingAnimationComponent } from "../animation/animation.component";
 
@@ -14,6 +14,11 @@ export class NGSuiteLoadingPageComponent implements AfterViewInit {
   private readonly injector =  inject(Injector);
   private readonly cd =  inject(ChangeDetectorRef);
   private readonly config = inject(NGS_CONFIG);
+
+  readonly showing = input(false);
+
+  @HostBinding('class.visible')
+  get visible() { return this.showing(); }
 
   private componentRef?: ComponentRef<any>;
 
