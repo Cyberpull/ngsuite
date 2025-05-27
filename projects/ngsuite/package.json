@@ -7,10 +7,6 @@
   },
   "homepage": "https://www.cyberpull.com/wiki/opensource/ngsuite",
   "keywords": ["angular", "ngsuite", "angular sdk", "sdk", "angular directives", "angular components"],
-  "peerDependencies": {
-    "@angular/common": "^19.2.13",
-    "@angular/core": "^19.2.13"
-  },
   "dependencies": {
     "tslib": "^2.3.0"
   }
