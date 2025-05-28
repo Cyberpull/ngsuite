@@ -20,9 +20,11 @@
 .ngs-dialog-box {
   display: block;
   position: relative;
-  border: 1px solid transparent;
   background-color: var(--ngs-dialog-background-color) !important;
   box-shadow: var(--ngs-dialog-box-shadow) !important;
+  border: 1px solid transparent;
+  border-top: none;
+  border-bottom: none;
 
   &:focus {
     outline: none;
