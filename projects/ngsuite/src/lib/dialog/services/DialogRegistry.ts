@@ -30,6 +30,11 @@ export class NGSuiteDialogRegistry {
 
   private readonly cloneList = () => Array.from(this.list());
 
+  private readonly indexOf = (item: NGSuiteDialogInstance) => {
+    const entries = this.list();
+    return entries.indexOf(item);
+  }
+
   readonly active = () => {
     const entries = this.cloneList();
     if (!entries.length) return null;
@@ -54,7 +59,7 @@ export class NGSuiteDialogRegistry {
   readonly remove = (item: NGSuiteDialogInstance) => {
     const entries = this.cloneList();
 
-    const index = entries.indexOf(item);
+    const index = this.indexOf(item);
     entries.splice(index, 1);
 
     this.list.set(entries);

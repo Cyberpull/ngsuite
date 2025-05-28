@@ -57,18 +57,19 @@ export class NGSuiteDialog {
       'add "<ngs-dialog-root></ngs-dialog-root>" to your root component to enable the NGSuiteDialog feature.'
     );
 
+    const onClosed = (ins: NGSuiteDialogInstance) => {
+      this.registry.remove(ins);
+    }
+
     const instance = new NGSuiteDialogInstance(
       root.viewContainerRef,
       component,
       root.injector,
+      onClosed,
       config
     );
 
     this.registry.add(instance);
-
-    instance.afterClosed.subscribe(() => {
-      this.registry.remove(instance);
-    });
 
     return instance;
   }

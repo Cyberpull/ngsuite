@@ -5,6 +5,8 @@ import { NGSuiteDialogComponent } from "../components/dialog/dialog.component";
 import { NGSuiteDialogCommand, NGSuiteDialogConfig, NGS_DIALOG_CONFIG, NGS_DIALOG_CONTENT } from "../interfaces/Dialog";
 import { NGSuiteDialogRef } from "./DialogRef";
 
+type OnClosedFn = (ins: NGSuiteDialogInstance) => void;
+
 export class NGSuiteDialogInstance {
 
   private xDialogComponentRef: ComponentRef<NGSuiteDialogComponent> = null as any;
@@ -20,6 +22,7 @@ export class NGSuiteDialogInstance {
     private xViewContainerRef: ViewContainerRef,
     private component: NGSuiteComponent<any>,
     private injector: Injector,
+    private onClosed: OnClosedFn,
     private config?: NGSuiteDialogConfig
   ) {
     this.command = new Observable<NGSuiteDialogCommand<any>>(subscriber => {
@@ -78,6 +81,8 @@ export class NGSuiteDialogInstance {
     const { xAfterClosedSubscriber } = this;
     xAfterClosedSubscriber.next(data);
     xAfterClosedSubscriber.complete();
+
+    this.onClosed(this);
   }
 
   send(cmd: NGSuiteDialogCommand<any>) {
