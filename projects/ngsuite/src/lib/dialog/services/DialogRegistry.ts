@@ -14,16 +14,16 @@ export class NGSuiteDialogRegistry {
   private xCount = 0;
 
   constructor() {
-    const body = document.querySelector('body');
-
     effect(() => {
       const entries = this.list();
 
       this.xCount = entries.length;
+      console.log(entries.length);
 
       // =================
 
       const isOpen = entries.length > 0;
+      const body = document.querySelector('body');
       body?.classList.toggle('ngs-dialog-open', isOpen);
     });
   }
