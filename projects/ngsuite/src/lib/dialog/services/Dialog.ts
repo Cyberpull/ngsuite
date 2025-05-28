@@ -1,4 +1,4 @@
-import { ApplicationRef, ComponentRef, createComponent, createEnvironmentInjector, Injectable } from "@angular/core";
+import { ApplicationRef, ComponentRef, createComponent, createEnvironmentInjector, inject, Injectable } from "@angular/core";
 import { Registry } from "../../Registry";
 import { NGSuiteComponent } from "../../core";
 import { NGSuiteDialogConfig, NGSuiteDialogPopupOptions, NGSuiteDialogRoot } from "../interfaces";
@@ -6,8 +6,8 @@ import { NGSuiteDialogInstance } from "./DialogInstance";
 import { NGSuiteDialogAlertComponent } from "../popup/alert/alert.component";
 import { NGSuiteDialogConfirmComponent } from "../popup/confirm/confirm.component";
 import { Observable, throwError } from "rxjs";
+import { NGSuiteDialogRegistry } from "./DialogRegistry";
 
-const DialogInstances: NGSuiteDialogInstance[] = [];
 const DialogRootMap = new Map<NGSuiteDialog, NGSuiteDialogRoot>();
 
 @Injectable({
@@ -15,10 +15,9 @@ const DialogRootMap = new Map<NGSuiteDialog, NGSuiteDialogRoot>();
 })
 export class NGSuiteDialog {
 
-  constructor() {
-    this.onEscape = this.onEscape.bind(this);
-    this.onDocumentClick = this.onDocumentClick.bind(this);
+  private readonly registry = inject(NGSuiteDialogRegistry);
 
+  constructor() {
     document.addEventListener('keydown', this.onEscape);
     document.addEventListener('click', this.onDocumentClick);
   }
@@ -32,26 +31,20 @@ export class NGSuiteDialog {
     DialogRootMap.delete(instance);
   }
 
-  private onEscape(e: KeyboardEvent) {
+  private onEscape = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       e.preventDefault();
 
-      if (!DialogInstances.length) return;
+      const instance = this.registry.active();
 
-      const instance = DialogInstances[DialogInstances.length - 1];
-
-      instance.send({
+      instance?.send({
         name: 'esc.close',
         value: false
       });
     }
   }
 
-  private onDocumentClick(e: MouseEvent) {
-    if (!DialogInstances.length) return;
-    const instance = DialogInstances[DialogInstances.length - 1];
-    instance.focus();
-  }
+  private onDocumentClick = (e: MouseEvent) => this.registry.focus();
 
   open(component: NGSuiteComponent<any>, config?: NGSuiteDialogConfig):  NGSuiteDialogInstance {
     if(!config) config = null as any;
@@ -71,25 +64,16 @@ export class NGSuiteDialog {
       config
     );
 
-    DialogInstances.push(instance);
+    this.registry.add(instance);
 
     instance.afterClosed.subscribe(() => {
-      const index = DialogInstances.indexOf(instance);
-      DialogInstances.splice(index, 1);
-
-      const hasInstances = DialogInstances.length > 0;
-      document.body.classList.toggle('ngs-dialog-open', hasInstances);
+      this.registry.remove(instance);
     });
 
     return instance;
   }
 
-  closeAll() {
-    while (DialogInstances.length) {
-      const instance = DialogInstances.pop();
-      instance?.close(false);
-    }
-  }
+  readonly closeAll = () => this.registry.closeAll();
 
   alert(title: string, message: string) {
     const data: NGSuiteDialogPopupOptions = { title, message };
