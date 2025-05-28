@@ -10,7 +10,9 @@ import { Observable, throwError } from "rxjs";
 const DialogInstances: NGSuiteDialogInstance[] = [];
 const DialogRootMap = new Map<NGSuiteDialog, NGSuiteDialogRoot>();
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class NGSuiteDialog {
 
   constructor() {
@@ -74,6 +76,9 @@ export class NGSuiteDialog {
     instance.afterClosed.subscribe(() => {
       const index = DialogInstances.indexOf(instance);
       DialogInstances.splice(index, 1);
+
+      const hasInstances = DialogInstances.length > 0;
+      document.body.classList.toggle('ngs-dialog-open', hasInstances);
     });
 
     return instance;
@@ -81,8 +86,8 @@ export class NGSuiteDialog {
 
   closeAll() {
     while (DialogInstances.length) {
-      const instance = DialogInstances.pop() as NGSuiteDialogInstance;
-      instance.close(false);
+      const instance = DialogInstances.pop();
+      instance?.close(false);
     }
   }
 
