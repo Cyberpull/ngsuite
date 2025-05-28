@@ -28,8 +28,10 @@ export class NGSuiteDialogRegistry {
     });
   }
 
+  private readonly cloneList = () => Array.from(this.list());
+
   readonly active = () => {
-    const entries = this.list();
+    const entries = this.cloneList();
     if (!entries.length) return null;
 
     const lastIndex = entries.length - 1;
@@ -42,7 +44,7 @@ export class NGSuiteDialogRegistry {
   }
 
   readonly add = (...items: NGSuiteDialogInstance[]) => {
-    const entries = this.list();
+    const entries = this.cloneList();
 
     entries.push(...items);
 
@@ -50,7 +52,7 @@ export class NGSuiteDialogRegistry {
   }
 
   readonly remove = (item: NGSuiteDialogInstance) => {
-    const entries = this.list();
+    const entries = this.cloneList();
 
     const index = entries.indexOf(item);
     entries.splice(index, 1);
@@ -59,7 +61,7 @@ export class NGSuiteDialogRegistry {
   }
 
   readonly closeAll = () => {
-    const entries = this.list();
+    const entries = this.cloneList();
 
     while (entries.length) {
       const instance = entries.pop();
