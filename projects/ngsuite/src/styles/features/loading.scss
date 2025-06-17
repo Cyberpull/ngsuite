@@ -1,6 +1,6 @@
-@use '../variables' as v;
+@use '../system' as ngs;
 
 :root {
-  --ngs-loading-background: #{v.$loading-background};
-  --ngs-loading-z-index: #{v.$loading-z-index};
+  --ngs-loading-background: #{ngs.$loading-background};
+  --ngs-loading-z-index: #{ngs.$loading-z-index};
 }

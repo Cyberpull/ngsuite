@@ -1,9 +1,8 @@
-@use '../../../../styles/variables' as vars;
+@use '../../../../styles/system' as ngs;
 // @import '../../../../styles/functions';
 
 :host {
   display: inline-block;
-  visibility: hidden;
   border: 1px solid rgba(0, 0, 0, .2);
   border-radius: 3px;
   cursor: pointer;
@@ -27,67 +26,66 @@
 
   &[default], // Deprecated
   &.default {
-    background-color: vars.$default;
+    background-color: ngs.$default;
     color: #333;
   }
 
   &[primary], // Deprecated
   &.primary {
-    background-color: vars.$primary;
+    background-color: ngs.$primary;
     color: #FFF;
   }
 
   &[secondary], // Deprecated
   &.secondary {
-    background-color: vars.$secondary;
+    background-color: ngs.$secondary;
     color: #FFF;
   }
 
   &[error], // Deprecated
   &.error {
-    background-color: vars.$error;
+    background-color: ngs.$error;
     color: #FFF;
   }
 
   &[danger], // Deprecated
   &.danger {
-    background-color: vars.$danger;
+    background-color: ngs.$danger;
     color: #FFF;
   }
 
   &[success], // Deprecated
   &.success {
-    background-color: vars.$success;
+    background-color: ngs.$success;
     color: #FFF;
   }
 
   &[warning], // Deprecated
   &.warning {
-    background-color: vars.$warning;
+    background-color: ngs.$warning;
     color: #333;
   }
 
   &[info], // Deprecated
   &.info {
-    background-color: vars.$info;
+    background-color: ngs.$info;
     color: #333;
   }
 
   &[light], // Deprecated
   &.light {
-    background-color: vars.$light;
+    background-color: ngs.$light;
     color: #333;
   }
 
   &[dark], // Deprecated
   &.dark {
-    background-color: vars.$dark;
+    background-color: ngs.$dark;
     color: #FFF;
   }
 
   > button {
     display: block;
-    visibility: visible;
     background-color: transparent;
     border: none !important;
     width: 100% !important;

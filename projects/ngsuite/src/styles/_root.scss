@@ -1,7 +1,7 @@
-@use './variables' as vars;
+@use './system' as ngs;
 
 :root {
-  @each $name, $value in vars.$color {
+  @each $name, $value in ngs.$color {
     --ngs-#{$name}-red: #{red($value)};
     --ngs-#{$name}-green: #{green($value)};
     --ngs-#{$name}-blue: #{blue($value)};

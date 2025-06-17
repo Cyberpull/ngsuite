@@ -1,6 +1,4 @@
-@forward './variables';
-@forward './functions';
-@forward './mixins';
+@forward './system';
 
 @use './root';
 @use './features';

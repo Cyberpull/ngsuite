@@ -1,20 +1,20 @@
-@use '../variables' as v;
+@use '../system' as ngs;
 
 :root {
-  --ngs-dialog-z-index: #{v.$dialog-z-index};
-  --ngs-dialog-backdrop-color: #{v.$dialog-backdrop-color};
+  --ngs-dialog-z-index: #{ngs.$dialog-z-index};
+  --ngs-dialog-backdrop-color: #{ngs.$dialog-backdrop-color};
 
-  --ngs-dialog-closebtn-color: #{v.$dialog-closebtn-color};
-  --ngs-dialog-closebtn-opacity: #{v.$dialog-closebtn-opacity};
+  --ngs-dialog-closebtn-color: #{ngs.$dialog-closebtn-color};
+  --ngs-dialog-closebtn-opacity: #{ngs.$dialog-closebtn-opacity};
 
-  --ngs-dialog-text-color: #{v.$dialog-text-color};
-  --ngs-dialog-header-text-color: #{v.$dialog-header-text-color};
-  --ngs-dialog-footer-text-color: #{v.$dialog-footer-text-color};
+  --ngs-dialog-text-color: #{ngs.$dialog-text-color};
+  --ngs-dialog-header-text-color: #{ngs.$dialog-header-text-color};
+  --ngs-dialog-footer-text-color: #{ngs.$dialog-footer-text-color};
 
-  --ngs-dialog-padding: #{v.$dialog-padding};
-  --ngs-dialog-background-color: #{v.$dialog-background-color};
-  --ngs-dialog-box-shadow: #{v.$dialog-box-shadow};
-  --ngs-dialog-border: #{v.$dialog-border};
+  --ngs-dialog-padding: #{ngs.$dialog-padding};
+  --ngs-dialog-background-color: #{ngs.$dialog-background-color};
+  --ngs-dialog-box-shadow: #{ngs.$dialog-box-shadow};
+  --ngs-dialog-border: #{ngs.$dialog-border};
 }
 
 .ngs-dialog-box {
