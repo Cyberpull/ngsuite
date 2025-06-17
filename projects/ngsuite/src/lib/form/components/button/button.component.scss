@@ -26,62 +26,62 @@
 
   &[default], // Deprecated
   &.default {
-    background-color: ngs.$default;
-    color: #333;
+    background-color: var(--ngs-default) !important;
+    color: var(--ngs-default-fg) !important;
   }
 
   &[primary], // Deprecated
   &.primary {
-    background-color: ngs.$primary;
-    color: #FFF;
+    background-color: var(--ngs-primary) !important;
+    color: var(--ngs-primary-fg) !important;
   }
 
   &[secondary], // Deprecated
   &.secondary {
-    background-color: ngs.$secondary;
-    color: #FFF;
+    background-color: var(--ngs-secondary) !important;
+    color: var(--ngs-secondary-fg) !important;
   }
 
   &[error], // Deprecated
   &.error {
-    background-color: ngs.$error;
-    color: #FFF;
+    background-color: var(--ngs-error) !important;
+    color: var(--ngs-error-fg) !important;
   }
 
   &[danger], // Deprecated
   &.danger {
-    background-color: ngs.$danger;
-    color: #FFF;
+    background-color: var(--ngs-danger) !important;
+    color: var(--ngs-danger-fg) !important;
   }
 
   &[success], // Deprecated
   &.success {
-    background-color: ngs.$success;
-    color: #FFF;
+    background-color: var(--ngs-success) !important;
+    color: var(--ngs-success-fg) !important;
   }
 
   &[warning], // Deprecated
   &.warning {
-    background-color: ngs.$warning;
-    color: #333;
+    background-color: var(--ngs-warning) !important;
+    color: var(--ngs-warning-fg) !important;
   }
 
   &[info], // Deprecated
   &.info {
-    background-color: ngs.$info;
-    color: #333;
+    background-color: var(--ngs-info) !important;
+    color: var(--ngs-info-fg) !important;
   }
 
   &[light], // Deprecated
   &.light {
-    background-color: ngs.$light;
-    color: #333;
+    background-color: var(--ngs-light) !important;
+    color: var(--ngs-light-fg) !important;
   }
 
   &[dark], // Deprecated
   &.dark {
-    background-color: ngs.$dark;
-    color: #FFF;
+    background-color: var(--ngs-dark) !important;
+    color: var(--ngs-dark-fg) !important;
   }
 
   > button {

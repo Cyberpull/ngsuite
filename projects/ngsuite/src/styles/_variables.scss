@@ -1,25 +1,63 @@
 $default: #CCC !default;
+$default-fg: #333 !default;
+
 $primary: #02AFEE !default;
+$primary-fg: #FFF !default;
+
 $secondary: #6C757D !default;
+$secondary-fg: #FFF !default;
+
 $error: #F00 !default;
+$error-fg: #FFF !default;
+
 $danger: #DC3545 !default;
+$danger-fg: #FFF !default;
+
 $success: #090 !default;
+$success-fg: #FFF !default;
+
 $warning: #FFC107 !default;
+$warning-fg: #333 !default;
+
 $info: #0DCAF0 !default;
+$info-fg: #333 !default;
+
 $light: #F8F9FA !default;
+$light-fg: #333 !default;
+
 $dark: #212529 !default;
+$dark-fg: #FFF !default;
 
 $color: (
   default: $default,
+  default-fg: $default,
+
   primary: $primary,
+  primary-fg: $primary-fg,
+
   secondary: $secondary,
+  secondary-fg: $secondary-fg,
+
   error: $error,
+  error-fg: $error-fg,
+
   danger: $danger,
+  danger-fg: $danger-fg,
+
   success: $success,
+  success-fg: $success-fg,
+
   warning: $warning,
+  warning-fg: $warning-fg,
+
   info: $info,
+  info-fg: $info-fg,
+
   light: $light,
+  light-fg: $light-fg,
+
   dark: $dark,
+  dark-fg: $dark-fg,
 );
 
 $device: (
