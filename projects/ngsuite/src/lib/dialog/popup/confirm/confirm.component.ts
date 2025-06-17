@@ -9,6 +9,7 @@ import {
   NGSuiteDialogFooterComponent,
   NGSuiteDialogHeaderComponent,
 } from "../../components";
+import { NGS_CONFIG } from "../../../core";
 
 @Component({
   selector: 'ngs-dialog-confirm',
@@ -26,6 +27,9 @@ export class NGSuiteDialogConfirmComponent {
 
   private readonly dialogRef = inject(NGSuiteDialogRef<NGSuiteDialogConfirmComponent>);
   private readonly data = inject(NGS_DIALOG_DATA);
+  private readonly config = inject(NGS_CONFIG);
+
+  readonly defaultBtnTheme = this.config.defaultAlertButtonTheme || 'primary';
 
   get title() { return this.data.title; }
   get message() { return this.data.message; }

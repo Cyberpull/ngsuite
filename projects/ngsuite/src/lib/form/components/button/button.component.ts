@@ -1,11 +1,13 @@
-import { Component, computed, ElementRef, HostBinding, inject, input, Input } from "@angular/core";
+import { Component, computed, ElementRef, HostBinding, inject, input } from "@angular/core";
 import { Icon, NGSuiteIconComponent } from "../../../core";
 import { NgClass } from "@angular/common";
 
-type ButtonDirection = 'normal' | 'reversed';
-type ButtonTheme = 'default' | 'primary' | 'secondary' | 'error' | 'danger' | 'success' | 'warning' | 'info' | 'light' | 'dark';
-type ButtonType = 'submit' | 'button' | 'reset' | 'menu';
-type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+import {
+  ButtonDirection,
+  ButtonSize,
+  ButtonTheme,
+  ButtonType,
+} from "../../interfaces";
 
 @Component({
   selector: 'ngs-button',

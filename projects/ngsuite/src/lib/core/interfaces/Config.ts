@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { NGSuiteComponent } from './Component';
+import { ButtonTheme } from '../../form';
 
 export interface NGSuiteConfig {
 
@@ -21,6 +22,20 @@ export interface NGSuiteConfig {
    * If this is `null` or `undefined`, it defaults to `loadingAnimation`
    */
   sectionLoadingAnimation?: NGSuiteComponent;
+
+  /**
+   * Default alert button theme
+   *
+   * If this is `undefined`, it defaults to `primary`
+   */
+  defaultAlertButtonTheme?: ButtonTheme;
+
+  /**
+   * Default confirm dialog button theme
+   *
+   * If this is `undefined`, it defaults to `primary`
+   */
+  defaultConfirmButtonTheme?: ButtonTheme;
 
   [key: string]: any;
 }
