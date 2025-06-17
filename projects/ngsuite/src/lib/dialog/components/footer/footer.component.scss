@@ -11,21 +11,15 @@
   > .wrapper {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: end;
     width: 100% !important;
+    gap: 10px;
 
     ::ng-deep {
       > [ngs-flex] {
         width: 0px;
-      }
-
-      > ngs-button {
-        margin: 0px 5px;
-
-        &:first-child { margin-left: 0px; }
-        &:last-child { margin-right: 0px; }
       }
     }
   }

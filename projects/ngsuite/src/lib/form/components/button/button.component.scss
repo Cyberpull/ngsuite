@@ -2,110 +2,139 @@
 // @import '../../../../styles/functions';
 
 :host {
-  --background: var(--ngs-light);
-  --border-color: rgba(0, 0, 0, .2);
-  --box-shadow: 0px 0px 3px var(--ngs-light);
-  --border: 1px solid var(--border-color);
-  --outline: 2px solid var(--border-color);
-  --icon-color: inherit;
-  --icon-border-left: none;
-  --icon-border-right: var(--border);
-  --icon-width: auto;
-  --icon-size: 16px;
-  --flex-direction: row;
-
-  --sum: calc(var(--red) + var(--green) + var(--blue));
-  --lightness: calc(var(--sum) / 255);
-  --color: hsl(0, 0%, calc((var(--lightness) - .6) * -10000000%));
-
-  // ------------------
-
   display: inline-block;
   visibility: hidden;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1rem;
+  overflow: clip;
 
-  &:focus {
-    outline: none !important;
+  &[block], // Deprecated
+  &.block { display: block; }
+
+  &.disabled {
+    opacity: .5 !important;
+    user-select: none !important;
+    cursor: not-allowed;
   }
 
-  &[block] {
-    display: block;
-    width: 100%;
+  &.xs { font-size: .6rem; }
+  &.sm { font-size: .8rem; }
+  &.md { font-size: 1rem; }
+  &.lg { font-size: 1.25rem; }
+  &.xl { font-size: 1.5rem; }
+
+  &[default], // Deprecated
+  &.default {
+    background-color: vars.$default;
+    color: #333;
   }
 
-  @each $name, $value in vars.$color {
-    &[#{$name}] {
-      --red: calc(var(--ngs-#{$name}-red) * 0.2126);
-      --green: calc(var(--ngs-#{$name}-green) * 0.7152);
-      --blue: calc(var(--ngs-#{$name}-blue) * 0.0722);
-
-      --background: var(--ngs-#{$name});
-      --box-shadow: 0px 0px 3px var(--ngs-#{$name});
-
-      &:disabled {
-        --background: rgba(var(--ngs-#{$name}-rgb), .9);
-      }
-    }
+  &[primary], // Deprecated
+  &.primary {
+    background-color: vars.$primary;
+    color: #FFF;
   }
 
-  &[reverse] {
-    --flex-direction: row-reverse;
-    --icon-border-left: var(--border);
-    --icon-border-right: none;
+  &[secondary], // Deprecated
+  &.secondary {
+    background-color: vars.$secondary;
+    color: #FFF;
   }
 
-  > .button {
+  &[error], // Deprecated
+  &.error {
+    background-color: vars.$error;
+    color: #FFF;
+  }
+
+  &[danger], // Deprecated
+  &.danger {
+    background-color: vars.$danger;
+    color: #FFF;
+  }
+
+  &[success], // Deprecated
+  &.success {
+    background-color: vars.$success;
+    color: #FFF;
+  }
+
+  &[warning], // Deprecated
+  &.warning {
+    background-color: vars.$warning;
+    color: #333;
+  }
+
+  &[info], // Deprecated
+  &.info {
+    background-color: vars.$info;
+    color: #333;
+  }
+
+  &[light], // Deprecated
+  &.light {
+    background-color: vars.$light;
+    color: #333;
+  }
+
+  &[dark], // Deprecated
+  &.dark {
+    background-color: vars.$dark;
+    color: #FFF;
+  }
+
+  > button {
     display: block;
     visibility: visible;
-    padding: 0px !important;
-    background-color: var(--background) !important;
-    border: var(--border) !important;
-    border-radius: 3px !important;
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color) !important;
-    cursor: pointer;
-    width: 100%;
+    background-color: transparent;
+    border: none !important;
+    width: 100% !important;
+    cursor: inherit !important;
+    color: inherit !important;
+    font-weight: 500;
+    font-size: 1em;
+    padding: 0px;
 
     &:focus {
       outline: none !important;
-      box-shadow: var(--box-shadow) !important;
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-      opacity: .5;
     }
   }
 
   .wrapper {
     display: flex;
     flex-direction: var(--flex-direction) !important;
-    text-align: center;
-    height: 100% !important;
-  }
 
-  .icon, .content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 15px;
-    white-space: nowrap;
-  }
+    --flex-direction: row;
+    --icon-border-left: none;
+    --icon-border-right: 1px solid rgba(0, 0, 0, .2);
 
-  .icon {
-    color: var(--icon-color) !important;
-    width: var(--icon-width) !important;
-    font-size: var(--icon-size) !important;
-    border-left: var(--icon-border-left) !important;
-    border-right: var(--icon-border-right) !important;
-  }
+    &.reversed {
+      --flex-direction: row-reverse;
+      --icon-border-left: 1px solid rgba(0, 0, 0, .2);
+      --icon-border-right: none;
+    }
 
-  .content {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex: 1 0 0 !important;
+    > .icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.05em;
+      border-left: var(--icon-border-left) !important;
+      border-right: var(--icon-border-right) !important;
+      padding: 0px .5em;
+    }
+
+    > .content {
+      display: block;
+      flex-grow: 1;
+      padding: .5em 1em;
+      text-align: center !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
 }

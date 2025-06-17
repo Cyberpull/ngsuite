@@ -1,8 +1,8 @@
-<button class="button" [type]="type" [disabled]="disabled">
-  <div class="wrapper">
-    @if (icon) {
+<button [type]="type()" [disabled]="disabled()">
+  <div class="wrapper" [ngClass]="btnClassNames()">
+    @if (icon(); as ico) {
       <div class="icon">
-        <ngs-icon [name]="icon"></ngs-icon>
+        <ngs-icon [name]="ico"></ngs-icon>
       </div>
     }
 
