@@ -3,20 +3,22 @@
 @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
 
 :host {
-  --vertical-align: middle;
-
   display: inline-block;
   vertical-align: var(--vertical-align) !important;
+
+  --vertical-align: middle;
 
   > .wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
+    align-items: center;
     min-height: auto;
 
     > i {
+      margin: 0px !important;
       vertical-align: var(--vertical-align) !important;
+      font-size: inherit !important;
     }
   }
 }

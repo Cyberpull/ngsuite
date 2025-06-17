@@ -86,6 +86,7 @@
 
   > button {
     display: block;
+    padding: 0px !important;
     background-color: transparent;
     border: none !important;
     width: 100% !important;
@@ -93,7 +94,6 @@
     color: inherit !important;
     font-weight: 500;
     font-size: 1em;
-    padding: 0px;
 
     &:focus {
       outline: none !important;
@@ -130,8 +130,8 @@
       flex-grow: 1;
       padding: .5em 1em;
       text-align: center !important;
-      overflow: hidden;
       text-overflow: ellipsis;
+      overflow: hidden;
     }
   }
 
