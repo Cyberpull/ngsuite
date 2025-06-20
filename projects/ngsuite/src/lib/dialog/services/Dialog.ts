@@ -1,40 +1,69 @@
-import { inject, Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivateChildFn, RouterStateSnapshot } from "@angular/router";
+import { effect, inject, Injectable, OnDestroy } from "@angular/core";
+import { ActivatedRouteSnapshot, CanActivateChildFn, NavigationStart, Router, RouterStateSnapshot } from "@angular/router";
 import { Registry } from "../../Registry";
 import { NGSuiteComponent } from "../../core";
 import { NGSuiteDialogConfig, NGSuiteDialogPopupOptions, NGSuiteDialogRoot } from "../interfaces";
 import { NGSuiteDialogInstance } from "./DialogInstance";
 import { NGSuiteDialogAlertComponent } from "../popup/alert/alert.component";
 import { NGSuiteDialogConfirmComponent } from "../popup/confirm/confirm.component";
-import { Observable, throwError } from "rxjs";
+import { filter, Observable, throwError } from "rxjs";
 import { NGSuiteDialogRegistry } from "./DialogRegistry";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 const DialogRootMap = new Map<NGSuiteDialog, NGSuiteDialogRoot>();
 
 @Injectable({
   providedIn: 'root',
 })
-export class NGSuiteDialog {
+export class NGSuiteDialog implements OnDestroy {
 
+  private readonly router = inject(Router);
   private readonly registry = inject(NGSuiteDialogRegistry);
 
+  private readonly nav = toSignal(this.router.events.pipe(
+    filter(e => e instanceof NavigationStart)
+  ), { initialValue: null });
+
   constructor() {
-    document.addEventListener('click', e => this.registry.focus());
+    document.addEventListener('click', this.onDocumentClick);
+    document.addEventListener('keydown', this.onDocumentKeyDown);
+  }
 
-    document.addEventListener('keydown', e => {
-      switch (e.key) {
-        case 'Escape': {
-          e.preventDefault();
+  ngOnDestroy() {
+    const { router, registry } = this;
 
-          const instance = this.registry.active();
+    document.removeEventListener('click', this.onDocumentClick);
+    document.removeEventListener('keydown', this.onDocumentKeyDown);
 
-          instance?.send({
-            name: 'esc.close',
-            value: false
-          });
-        } break;
-      }
+    effect(() => {
+      const nav = this.nav();
+      if (!nav) return;
+
+      const active = registry.active();
+      if (!active) return;
+
+      const canClose = active.config?.closeOnBackBtn ?? true;
+      if (canClose) active.close(false);
+
+      router.navigateByUrl(router.url, { replaceUrl: true });
     });
+  }
+
+  private readonly onDocumentClick = () => this.registry.focus();
+
+  private readonly onDocumentKeyDown = (e: KeyboardEvent) => {
+    switch (e.key) {
+      case 'Escape': {
+        e.preventDefault();
+
+        const instance = this.registry.active();
+
+        instance?.send({
+          name: 'esc.close',
+          value: false
+        });
+      } break;
+    }
   }
 
   static attach(instance: NGSuiteDialog, root: NGSuiteDialogRoot) {
@@ -114,16 +143,19 @@ export class NGSuiteDialog {
 
   // =========================
 
+  /** @deprecated */
   static readonly guard = (): CanActivateChildFn => (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    const { registry } = inject(NGSuiteDialog);
+    return true;
 
-    const active = registry.active();
-    if (!active) return true;
+    // const { registry } = inject(NGSuiteDialog);
 
-    const canClose = active.config?.closeOnBackBtn ?? true;
-    if (canClose) active.close(false);
+    // const active = registry.active();
+    // if (!active) return true;
 
-    return false;
+    // const canClose = active.config?.closeOnBackBtn ?? true;
+    // if (canClose) active.close(false);
+
+    // return false;
   }
 
 }
