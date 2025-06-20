@@ -116,7 +116,8 @@ export class NGSuiteDialog {
   // =========================
 
   static readonly guard = (): CanActivateChildFn => (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    const router = inject(Router);
+    if (route.firstChild) return true;
+
     const { registry } = inject(NGSuiteDialog);
 
     const active = registry.active();
@@ -125,7 +126,7 @@ export class NGSuiteDialog {
     const canClose = active.config?.closeOnBackBtn ?? true;
     if (canClose) active.close(false);
 
-    return router.parseUrl(router.url);
+    return false;
   }
 
 }
