@@ -11,24 +11,25 @@ export function NGS_DIALOG_TOKEN<T = any>(): InjectionToken<T> {
   return NGS_DIALOG_DATA;
 }
 
-export interface NGSuiteDialogConfig {
+export type NGSuiteDialogConfig = {
   closeOnEsc?: boolean;
+  closeOnBackBtn?: boolean;
   backdropClose?: boolean;
   closeBtn?: boolean;
   data?: any
 }
 
-export interface NGSuiteDialogCommand<T = any> {
+export type NGSuiteDialogCommand<T = any> = {
   name: string;
   value?: T;
 }
 
-export interface NGSuiteDialogPopupOptions {
+export type NGSuiteDialogPopupOptions = {
   title: string;
   message: string;
 }
 
-export interface NGSuiteDialogRoot {
+export type NGSuiteDialogRoot = {
   viewContainerRef: ViewContainerRef;
   injector: Injector;
 }

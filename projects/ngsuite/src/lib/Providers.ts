@@ -4,7 +4,7 @@ import { NGS_CONFIG, NGSuiteConfig } from "./core/interfaces/Config";
 import { Registry } from "./Registry";
 
 export function provideNGSuite(config?: NGSuiteConfig) {
-  if (!config) config = {};
+  config ||= {};
 
   return Registry.toEnvironmentProviders([
     { provide: NGS_CONFIG, useValue: config },

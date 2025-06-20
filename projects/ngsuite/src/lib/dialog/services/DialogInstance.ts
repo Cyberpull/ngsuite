@@ -23,7 +23,7 @@ export class NGSuiteDialogInstance {
     private component: NGSuiteComponent<any>,
     private injector: Injector,
     private onClosed: OnClosedFn,
-    private config?: NGSuiteDialogConfig
+    public readonly config?: NGSuiteDialogConfig
   ) {
     this.command = new Observable<NGSuiteDialogCommand<any>>(subscriber => {
       const dialogRef = new NGSuiteDialogRef<any>(subscriber);

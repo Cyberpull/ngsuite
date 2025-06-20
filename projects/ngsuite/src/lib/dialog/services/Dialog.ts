@@ -1,4 +1,5 @@
-import { ApplicationRef, ComponentRef, createComponent, createEnvironmentInjector, inject, Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
+import { ActivatedRouteSnapshot, CanActivateChildFn, RouterStateSnapshot } from "@angular/router";
 import { Registry } from "../../Registry";
 import { NGSuiteComponent } from "../../core";
 import { NGSuiteDialogConfig, NGSuiteDialogPopupOptions, NGSuiteDialogRoot } from "../interfaces";
@@ -18,8 +19,22 @@ export class NGSuiteDialog {
   private readonly registry = inject(NGSuiteDialogRegistry);
 
   constructor() {
-    document.addEventListener('keydown', this.onEscape);
-    document.addEventListener('click', this.onDocumentClick);
+    document.addEventListener('click', e => this.registry.focus());
+
+    document.addEventListener('keydown', e => {
+      switch (e.key) {
+        case 'Escape': {
+          e.preventDefault();
+
+          const instance = this.registry.active();
+
+          instance?.send({
+            name: 'esc.close',
+            value: false
+          });
+        } break;
+      }
+    });
   }
 
   static attach(instance: NGSuiteDialog, root: NGSuiteDialogRoot) {
@@ -30,21 +45,6 @@ export class NGSuiteDialog {
   static detach(instance: NGSuiteDialog) {
     DialogRootMap.delete(instance);
   }
-
-  private onEscape = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      e.preventDefault();
-
-      const instance = this.registry.active();
-
-      instance?.send({
-        name: 'esc.close',
-        value: false
-      });
-    }
-  }
-
-  private onDocumentClick = (e: MouseEvent) => this.registry.focus();
 
   open(component: NGSuiteComponent<any>, config?: NGSuiteDialogConfig):  NGSuiteDialogInstance {
     if(!config) config = null as any;
@@ -80,7 +80,9 @@ export class NGSuiteDialog {
     const data: NGSuiteDialogPopupOptions = { title, message };
 
     const dialog = this.open(NGSuiteDialogAlertComponent, {
+      closeOnBackBtn: false,
       backdropClose: false,
+      closeOnEsc: false,
       data
     });
 
@@ -101,12 +103,27 @@ export class NGSuiteDialog {
     const data: NGSuiteDialogPopupOptions = { title, message };
 
     const dialog = this.open(NGSuiteDialogConfirmComponent, {
+      closeOnBackBtn: false,
       backdropClose: false,
       closeOnEsc: false,
       data
     });
 
     return dialog.afterClosed;
+  }
+
+  // =========================
+
+  static readonly guard = (): CanActivateChildFn => (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+    const { registry } = inject(NGSuiteDialog);
+
+    const active = registry.active();
+    if (!active) return true;
+
+    const canClose = active.config?.closeOnBackBtn ?? true;
+    if (canClose) active.close(false);
+
+    return false;
   }
 
 }
