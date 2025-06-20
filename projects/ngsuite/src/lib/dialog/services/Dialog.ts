@@ -15,55 +15,27 @@ const DialogRootMap = new Map<NGSuiteDialog, NGSuiteDialogRoot>();
 @Injectable({
   providedIn: 'root',
 })
-export class NGSuiteDialog implements OnDestroy {
+export class NGSuiteDialog {
 
-  private readonly router = inject(Router);
   private readonly registry = inject(NGSuiteDialogRegistry);
 
-  private readonly nav = toSignal(this.router.events.pipe(
-    filter(e => e instanceof NavigationStart)
-  ), { initialValue: null });
-
   constructor() {
-    document.addEventListener('click', this.onDocumentClick);
-    document.addEventListener('keydown', this.onDocumentKeyDown);
-  }
+    document.addEventListener('click', () => this.registry.focus());
 
-  ngOnDestroy() {
-    const { router, registry } = this;
+    document.addEventListener('keydown', e => {
+      switch (e.key) {
+        case 'Escape': {
+          e.preventDefault();
 
-    document.removeEventListener('click', this.onDocumentClick);
-    document.removeEventListener('keydown', this.onDocumentKeyDown);
+          const instance = this.registry.active();
 
-    effect(() => {
-      const nav = this.nav();
-      if (!nav) return;
-
-      const active = registry.active();
-      if (!active) return;
-
-      const canClose = active.config?.closeOnBackBtn ?? true;
-      if (canClose) active.close(false);
-
-      router.navigateByUrl(router.url, { replaceUrl: true });
+          instance?.send({
+            name: 'esc.close',
+            value: false
+          });
+        } break;
+      }
     });
-  }
-
-  private readonly onDocumentClick = () => this.registry.focus();
-
-  private readonly onDocumentKeyDown = (e: KeyboardEvent) => {
-    switch (e.key) {
-      case 'Escape': {
-        e.preventDefault();
-
-        const instance = this.registry.active();
-
-        instance?.send({
-          name: 'esc.close',
-          value: false
-        });
-      } break;
-    }
   }
 
   static attach(instance: NGSuiteDialog, root: NGSuiteDialogRoot) {
@@ -143,19 +115,17 @@ export class NGSuiteDialog implements OnDestroy {
 
   // =========================
 
-  /** @deprecated */
   static readonly guard = (): CanActivateChildFn => (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    return true;
+    const router = inject(Router);
+    const { registry } = inject(NGSuiteDialog);
 
-    // const { registry } = inject(NGSuiteDialog);
+    const active = registry.active();
+    if (!active) return true;
 
-    // const active = registry.active();
-    // if (!active) return true;
+    const canClose = active.config?.closeOnBackBtn ?? true;
+    if (canClose) active.close(false);
 
-    // const canClose = active.config?.closeOnBackBtn ?? true;
-    // if (canClose) active.close(false);
-
-    // return false;
+    return router.parseUrl(router.url);
   }
 
 }
