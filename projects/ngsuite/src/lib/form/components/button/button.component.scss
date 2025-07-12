@@ -129,6 +129,7 @@
       display: block;
       flex-grow: 1;
       padding: .5em 1em;
+      white-space: nowrap !important;
       text-align: center !important;
       text-overflow: ellipsis;
       overflow: hidden;
